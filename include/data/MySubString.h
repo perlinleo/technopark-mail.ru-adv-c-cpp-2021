@@ -1,0 +1,22 @@
+
+
+#ifndef INCLUDE_MYSUBSTRING_MYSUBSTRING_H_
+#define INCLUDE_MYSUBSTRING_MYSUBSTRING_H_
+
+#include <stdio.h>
+#include <MyString.h>
+
+typedef struct MySubString
+{
+    int startIndex;
+    MyString *string;
+    MyString *parentString;
+} MySubString;
+
+MySubString *allocMySubString(size_t parentLen, size_t subLen);
+
+MySubString *getSubStringByParams(char *startPattern, size_t startPatternLength, char *endPattern,
+                                  size_t endPatternLength, char *string, size_t stringLength);
+
+void freeMySubString(MySubString *substr);
+#endif

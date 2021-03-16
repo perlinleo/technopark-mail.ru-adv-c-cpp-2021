@@ -12,6 +12,7 @@
 #define TAGNAMEMAXLENGTH 100
 #define SRCMAXLENGTH 100
 
+//newplace-> include/data/MySubString.h
 typedef struct MyString
 {
     char *string;
@@ -73,7 +74,8 @@ void InsertMySrc(MySubString data, MySrcTreeNode *root)
             printf("Value is already in the tree!");
         }
 }
-
+//newplace-> include/data/MySubString.h
+//newplace-> MySubString.c
 MyString *allocMyStringMemory(size_t stringLen)
 {
     MyString *temp;
@@ -82,10 +84,19 @@ MyString *allocMyStringMemory(size_t stringLen)
     return temp;
 }
 
+//newplace-> include/data/MySubString.h
+//newplace-> MySubString.c
 void freeString(MyString *string)
 {
     free(string->string);
     free(string);
+}
+
+void freeMySubString(MySubString *substr)
+{
+    free(substr->parentString);
+    free(substr->string);
+    free(substr);
 }
 
 MySubString *allocMySubString(size_t parentLen, size_t subLen)
@@ -178,11 +189,8 @@ MySubString *getSubStringByParams(char *startPattern, size_t startPatternLength,
     return (void *)0;
 }
 
-int parseHTMLTag(char *tagText)
-{
-    return 0;
-}
-
+//newplace-> include/data/MyString.h
+//newplace-> MyString.c
 void printLines(MyString **Strings, size_t lineCount)
 {
     for (int i = 0; i < lineCount; ++i)
@@ -191,6 +199,8 @@ void printLines(MyString **Strings, size_t lineCount)
     }
 }
 
+//newplace-> include/data/MyString.h
+//newplace-> MyString.c
 size_t readLines(MyString **userInput)
 {
     size_t i = 0;
