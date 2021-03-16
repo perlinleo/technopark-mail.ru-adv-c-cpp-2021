@@ -15,8 +15,5 @@ typedef struct MySubString
 
 MySubString *allocMySubString(size_t parentLen, size_t subLen);
 
-MySubString *getSubStringByParams(char *startPattern, size_t startPatternLength, char *endPattern,
-                                  size_t endPatternLength, char *string, size_t stringLength);
-
 void freeMySubString(MySubString *substr);
 #endif

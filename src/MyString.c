@@ -30,6 +30,50 @@ void printMyStrings(MyString **Strings, size_t lineCount)
     }
 }
 
+int findPattern(char *pattern, char *string, size_t stringLength, size_t patternLength, size_t startPoint)
+{
+    int patternCounter = 0,
+        startIndex = 0,
+        j = 0,
+        k = 0;
+    bool paternFound = false;
+    for (int i = startPoint; i < stringLength; i++)
+    {
+        if (j == patternLength)
+            return startIndex;
+        if (string[i] == pattern[0])
+        {
+            startIndex = i;
+            for (j = 1; j < patternLength; j++)
+            {
+                i++;
+                //printf("char %c = %c\n", string[i], pattern[j]);
+                if (string[i] != pattern[j])
+                {
+                    i -= j;
+                    break;
+                }
+            }
+        }
+    }
+    if (j == patternLength)
+        return startIndex;
+    else
+        return -1;
+}
+
+void printStringHighlightByIndex(char *string, size_t stringLength, size_t highlightIndex)
+{
+    assert(highlightIndex < 100);
+
+    printf("\n%s\n", string);
+    for (int i = 0; i < highlightIndex; ++i)
+    {
+        printf("~");
+    }
+    printf("^\n");
+}
+
 size_t readMyStrings(MyString **userInput)
 {
     size_t i = 0;

@@ -2,6 +2,7 @@
 #define INCLUDE_MYSTRING_MYSTRING_H_
 
 #include <stdio.h>
+#define MAXSTRINGAMOUNT 10
 
 typedef struct MyString
 {
