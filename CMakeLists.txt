@@ -22,6 +22,7 @@ project(individual-task1)
 # </Test>
 
 # <Source>
+set(CMAKE_BUILD_TYPE Debug)
 include_directories("${PROJECT_SOURCE_DIR}/include")
 
 file(GLOB sources

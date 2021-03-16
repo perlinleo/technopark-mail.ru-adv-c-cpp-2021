@@ -28,9 +28,10 @@ size_t getSrcTags(MyString **userInput, size_t linesAmount, char *attrValue)
     for (int i = 0; i < linesAmount; ++i)
     {
         MySubString *htmlTag = getSubStringByParams("<", 1, ">", 1, userInput[i]->string, userInput[i]->stringLen);
-        printf("HTML TAG FOUND->>>>: \n%s\n", htmlTag->string->string);
+        
         if (htmlTag != NULL)
         {
+            printf("HTML TAG FOUND->>>>: \n%s\n", htmlTag->string->string);
             size_t spacePlace = findPattern(" ", htmlTag->string->string, htmlTag->string->stringLen, 1, 0);
 
             if (spacePlace > 1 && spacePlace < 100)
@@ -52,7 +53,9 @@ size_t getSrcTags(MyString **userInput, size_t linesAmount, char *attrValue)
                 {
                     MySubString *substr = getSubStringByParams("src=\"", 5, "\"", 1, htmlTag->string->string,
                                                                htmlTag->string->stringLen);
-                    printStringHighlightByIndex(substr->string->string, substr->string->stringLen, substr->startIndex);
+                    if(substr!=NULL){
+                        printStringHighlightByIndex(substr->string->string, substr->string->stringLen, substr->startIndex);
+                    }
                 }
             }
         }
