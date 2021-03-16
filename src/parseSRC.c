@@ -7,8 +7,21 @@
 #define MAXSTRINGAMOUNT 10
 #define MAXSTRINGLENGTH 100
 
-#include <include/parser/parseFuncs.h>
+#include <parser/parseFuncs.h>
 //#include <include/data/MyResultSrc.h>
+
+void printStringHighlightByIndex(char *string, size_t stringLength, size_t highlightIndex)
+{
+    assert(highlightIndex < 100);
+
+    printf("\n%s\n", string);
+    for (int i = 0; i < highlightIndex; ++i)
+    {
+        printf("~");
+    }
+    printf("^\n");
+}
+
 
 size_t getSrcTags(MyString **userInput, size_t linesAmount, char *attrValue)
 {
@@ -46,3 +59,5 @@ size_t getSrcTags(MyString **userInput, size_t linesAmount, char *attrValue)
     }
     return 0;
 }
+
+//void printSrcTags(MyResultSrc* MyResults, )

@@ -4,7 +4,7 @@
 #define INCLUDE_MYSUBSTRING_MYSUBSTRING_H_
 
 #include <stdio.h>
-#include <MyString.h>
+#include <data/MyString.h>
 
 typedef struct MySubString
 {

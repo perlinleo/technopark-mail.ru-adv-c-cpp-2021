@@ -2,11 +2,23 @@ cmake_minimum_required(VERSION 3.16)
 project(individual-task1)
 
 # <Coverage>
-
+#set(CMAKE_C_FLAGS "-pedantic -fprofile-arcs -ftest-coverage")
+#set(CMAKE_CXX_FLAGS "-pedantic -fprofile-arcs -ftest-coverage")
 # </Coverage>
 
 # <Test>
+#configure_file(CMakeLists.txt.in
+ #       googletest-download/CMakeLists.txt)
+#execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
+   #     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
+#execute_process(COMMAND ${CMAKE_COMMAND} --build .
+ #       WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/googletest-download )
 
+#add_subdirectory(${CMAKE_BINARY_DIR}/googletest-src
+  #      ${CMAKE_BINARY_DIR}/googletest-build)
+
+#enable_testing()
+#add_subdirectory(test)
 # </Test>
 
 # <Source>
@@ -21,4 +33,4 @@ file(GLOB sources
 add_definitions(-DSOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
 # </SOURCE_DIR>
 
-add_executable(individual-task1 ${sources})
+add_executable(hw-1 ${sources})

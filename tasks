@@ -1,0 +1,2 @@
+continue file refactoring
+распределить функции из фанк.си чтобы импортировались только библиотеки MySubString

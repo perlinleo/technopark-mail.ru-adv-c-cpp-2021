@@ -12,13 +12,15 @@
 #define TAGNAMEMAXLENGTH 100
 #define SRCMAXLENGTH 100
 
-//newplace-> include/data/MySubString.h
+//newplace-> include/data/MyString.h
 typedef struct MyString
 {
     char *string;
     size_t stringLen;
 } MyString;
 
+
+//newplace-> include/data/MySubString.h
 typedef struct MySubString
 {
     int startIndex;
@@ -26,6 +28,13 @@ typedef struct MySubString
     MyString *parentString;
 } MySubString;
 
+/*
+  ____    _____   _       _____   _____   _____   ____  
+ |  _ \  | ____| | |     | ____| |_   _| | ____| |  _ \ 
+ | | | | |  _|   | |     |  _|     | |   |  _|   | | | |
+ | |_| | | |___  | |___  | |___    | |   | |___  | |_| |
+ |____/  |_____| |_____| |_____|   |_|   |_____| |____/ 
+                                                        */
 typedef struct MySrcTreeNode
 {
     MySubString data;
@@ -74,6 +83,21 @@ void InsertMySrc(MySubString data, MySrcTreeNode *root)
             printf("Value is already in the tree!");
         }
 }
+/*
+  ____    _____   _       _____   _____   _____   ____  
+ |  _ \  | ____| | |     | ____| |_   _| | ____| |  _ \ 
+ | | | | |  _|   | |     |  _|     | |   |  _|   | | | |
+ | |_| | | |___  | |___  | |___    | |   | |___  | |_| |
+ |____/  |_____| |_____| |_____|   |_|   |_____| |____/ 
+                                                        */
+
+
+
+
+
+
+
+
 //newplace-> include/data/MySubString.h
 //newplace-> MySubString.c
 MyString *allocMyStringMemory(size_t stringLen)
@@ -92,13 +116,17 @@ void freeString(MyString *string)
     free(string);
 }
 
+
+//place-> MySubString.c
+//place -> MySubString.h
 void freeMySubString(MySubString *substr)
 {
     free(substr->parentString);
     free(substr->string);
     free(substr);
 }
-
+//place-> MySubString.c
+//place -> MySubString.h
 MySubString *allocMySubString(size_t parentLen, size_t subLen)
 {
     MySubString *temp;
@@ -108,11 +136,14 @@ MySubString *allocMySubString(size_t parentLen, size_t subLen)
     return temp;
 }
 
+
+//new->parseFuncs.c
 bool isAlphaNumerical(char a)
 {
     return ((a >= '0' && a <= '9') || (a >= 'A' && a <= 'Z') || (a >= 'a' && a <= 'z'));
 }
 
+//parseFuncs.c
 int findPattern(char *pattern, char *string, size_t stringLength, size_t patternLength, size_t startPoint)
 {
     int patternCounter = 0,
@@ -157,6 +188,7 @@ void printStringHighlightByIndex(char *string, size_t stringLength, size_t highl
     printf("^\n");
 }
 
+//moved to parseFuncs
 MySubString *getSubStringByParams(char *startPattern, size_t startPatternLength, char *endPattern,
                                   size_t endPatternLength, char *string, size_t stringLength)
 {
@@ -233,6 +265,8 @@ size_t readLines(MyString **userInput)
     return i;
 }
 
+
+//moved->parseSRC.c
 size_t getSrcTags(MyString **userInput, size_t linesAmount, char *attrValue, MySrcTreeNode *core)
 {
     for (int i = 0; i < linesAmount; ++i)
