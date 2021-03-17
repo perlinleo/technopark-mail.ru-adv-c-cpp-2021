@@ -16,4 +16,6 @@ typedef struct MySubString
 MySubString *allocMySubString(size_t parentLen, size_t subLen);
 
 void freeMySubString(MySubString *substr);
+
+void printMySubString(MySubString *substr);
 #endif

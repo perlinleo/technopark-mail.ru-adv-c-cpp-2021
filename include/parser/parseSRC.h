@@ -4,7 +4,8 @@
 
 #include <stdio.h>
 #include <data/MyString.h>
+#include <data/ParsedInfo.h>
 
-size_t getSrcTags(MyString **userInput, size_t linesAmount, char *attrValue);
+size_t getSrcTags(MyString **userInput, size_t linesAmount, char *attrValue, ParsedInfo** result);
 
 #endif
