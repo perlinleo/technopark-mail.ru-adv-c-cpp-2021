@@ -13,7 +13,7 @@ MyString *allocMyString(size_t stringLen)
     MyString *temp;
     temp = (MyString *)malloc(sizeof(MyString));
     temp->string = (char *)calloc(sizeof(char), stringLen);
-    temp->stringLen=stringLen;
+    temp->stringLen = stringLen;
     return temp;
 }
 
@@ -27,10 +27,9 @@ void printMyStrings(MyString **Strings, size_t lineCount)
 {
     for (int i = 0; i < lineCount; ++i)
     {
-        printf("\n#%i:%s\n length: %li\n", i + 1, Strings[i]->string, Strings[i]->stringLen);
+        printf("\n#%i:%s\n length: %zu\n", i + 1, Strings[i]->string, Strings[i]->stringLen);
     }
 }
-
 
 size_t readMyStrings(MyString **userInput)
 {

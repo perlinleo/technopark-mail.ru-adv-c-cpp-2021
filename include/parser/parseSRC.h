@@ -1,6 +1,6 @@
 
-#ifndef INCLUDE_PARSESRC_PARSESRC_H_
-#define INCLUDE_PARSESRC_PARSESRC_H_
+#ifndef INCLUDE_PARSER_PARSESRC_H_
+#define INCLUDE_PARSER_PARSESRC_H_
 
 #include <stdio.h>
 #include <data/MyString.h>

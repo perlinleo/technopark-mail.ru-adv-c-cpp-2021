@@ -11,9 +11,7 @@ int findPattern(char *pattern, char *string, size_t stringLength, size_t pattern
 {
     int patternCounter = 0,
         startIndex = 0,
-        j = 0,
-        k = 0;
-    bool paternFound = false;
+        j = 0;
     for (int i = startPoint; i < stringLength; i++)
     {
         if (j == patternLength)
@@ -39,12 +37,11 @@ int findPattern(char *pattern, char *string, size_t stringLength, size_t pattern
         return -1;
 }
 
-
 MySubString *getSubStringByParams(char *startPattern, size_t startPatternLength, char *endPattern,
                                   size_t endPatternLength, char *string, size_t stringLength)
 {
-    int start, end,
-        i = 0;
+    int start, end;
+
     start = findPattern(startPattern, string, stringLength, startPatternLength, 0);
     if (start == -1)
         return (void *)0;
@@ -57,9 +54,10 @@ MySubString *getSubStringByParams(char *startPattern, size_t startPatternLength,
     //printf("\nstart: %i \nend: %i \n", start, end);
     if (start < end)
     {
+        int i = 0;
         MySubString *temp = allocMySubString(stringLength, end - start + endPatternLength);
         temp->startIndex = start;
-        for (i = 0; i < end - start + endPatternLength; ++i)
+        for (i; i < end - start + endPatternLength; ++i)
         {
             //printf("\n_(%i)_\n", i + start);
             temp->string->string[i] = string[i + start];
@@ -67,10 +65,9 @@ MySubString *getSubStringByParams(char *startPattern, size_t startPatternLength,
         }
         temp->string->stringLen = i;
         //substr.subStringText[end - start + 1] = '\0';
-        temp->parentString->string=(char*)malloc(sizeof(char)*stringLength);
-        temp->parentString->stringLen=stringLength;
+        temp->parentString->string = (char *)malloc(sizeof(char) * stringLength);
+        temp->parentString->stringLen = stringLength;
         return temp;
     }
     return (void *)0;
 }
-

@@ -11,8 +11,11 @@ typedef struct MyString
 } MyString;
 
 MyString *allocMyString(size_t stringLen);
+
 void freeString(MyString *string);
+
 void printMyStrings(MyString **Strings, size_t lineCount);
+
 size_t readMyStrings(MyString **userInput);
 
 #endif

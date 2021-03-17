@@ -1,5 +1,5 @@
-#ifndef INCLUDE_PARSEFUNCS_PARSEFUNCS_H_
-#define INCLUDE_PARSEFUNCS_PARSEFUNCS_H_
+#ifndef INCLUDE_PARSER_PARSEFUNCS_H_
+#define INCLUDE_PARSER_PARSEFUNCS_H_
 
 #include "data/MySubString.h"
 #include "data/MyString.h"

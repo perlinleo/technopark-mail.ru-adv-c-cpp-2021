@@ -16,3 +16,4 @@ TEST(allocMyString, correct){
     ASSERT_EQ(11,test->stringLen);
     ASSERT_EQ(str,test->string);
 }
+

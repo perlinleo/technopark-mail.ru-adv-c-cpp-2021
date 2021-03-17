@@ -13,14 +13,13 @@
 
 //printstringHighlightsbyIndexmoved to ParsedInfo.c
 
-
-size_t getSrcTags(MyString **userInput, size_t linesAmount, char *attrValue, ParsedInfo** result)
-{   
+size_t getSrcTags(MyString **userInput, size_t linesAmount, char *attrValue, ParsedInfo **result)
+{
     size_t counter = 0;
     for (int i = 0; i < linesAmount; ++i)
     {
         MySubString *htmlTag = getSubStringByParams("<", 1, ">", 1, userInput[i]->string, userInput[i]->stringLen);
-        
+
         if (htmlTag != NULL)
         {
             //HTML TAG FOUND
@@ -45,9 +44,10 @@ size_t getSrcTags(MyString **userInput, size_t linesAmount, char *attrValue, Par
                 {
                     MySubString *substr = getSubStringByParams("src=\"", 5, "\"", 1, htmlTag->string->string,
                                                                htmlTag->string->stringLen);
-                    if(substr!=NULL){
-                        printf("\n%s\n%s",htmlTag->string->string,substr->string->string);
-                        result[counter]=newParsedInfo(htmlTag,substr);
+                    if (substr != NULL)
+                    {
+                        printf("\n%s\n%s", htmlTag->string->string, substr->string->string);
+                        result[counter] = newParsedInfo(htmlTag, substr);
                         counter++;
                     }
                 }
