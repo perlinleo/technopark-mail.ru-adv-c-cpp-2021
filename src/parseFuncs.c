@@ -1,5 +1,6 @@
 #include "data/MySubString.h"
 #include <stdbool.h>
+#include <stdlib.h>
 
 bool isAlphaNumerical(char a)
 {
@@ -47,7 +48,7 @@ MySubString *getSubStringByParams(char *startPattern, size_t startPatternLength,
     start = findPattern(startPattern, string, stringLength, startPatternLength, 0);
     if (start == -1)
         return (void *)0;
-    printf("checking from %i char \n", start);
+    //printf("checking from %i char \n", start);
     end = findPattern(endPattern, string, stringLength, endPatternLength, start + startPatternLength);
     if (end == -1)
         return (void *)0;
@@ -66,6 +67,8 @@ MySubString *getSubStringByParams(char *startPattern, size_t startPatternLength,
         }
         temp->string->stringLen = i;
         //substr.subStringText[end - start + 1] = '\0';
+        temp->parentString->string=(char*)malloc(sizeof(char)*stringLength);
+        temp->parentString->stringLen=stringLength;
         return temp;
     }
     return (void *)0;
