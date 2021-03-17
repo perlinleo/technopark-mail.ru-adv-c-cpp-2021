@@ -6,6 +6,8 @@ language: c
 
 compiler: gcc
 
+CODECOV_TOKEN='dacaf1f7-e4ca-4b9b-bdce-a949237bee20'
+
 install:
   - sudo apt-get install valgrind
   - sudo apt-get install cppcheck
@@ -13,7 +15,7 @@ install:
 
 script:
   - cppcheck --enable=all --language=c include/*/* src --suppress=missingInclude
-  - cpplint --extensions=c include/*/* src/*
+  #- cpplint --extensions=c include/*/* src/*
   - mkdir build && cd build
   - cmake ..  
   - make clean && make

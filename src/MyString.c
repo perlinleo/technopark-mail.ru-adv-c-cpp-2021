@@ -13,6 +13,7 @@ MyString *allocMyString(size_t stringLen)
     MyString *temp;
     temp = (MyString *)malloc(sizeof(MyString));
     temp->string = (char *)calloc(sizeof(char), stringLen);
+    temp->stringLen=stringLen;
     return temp;
 }
 
