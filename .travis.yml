@@ -6,7 +6,7 @@ language: c
 
 compiler: gcc
 
-CODECOV_TOKEN='dacaf1f7-e4ca-4b9b-bdce-a949237bee20'
+
 
 install:
   - sudo apt-get install valgrind
