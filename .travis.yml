@@ -15,7 +15,7 @@ install:
 
 script:
   - cppcheck --enable=all --language=c include/*/* src --suppress=missingInclude
-  #- cpplint --extensions=c include/*/* src/*
+  - cpplint --extensions=c include/*/* src/*
   - mkdir build && cd build
   - cmake ..  
   - make clean && make
