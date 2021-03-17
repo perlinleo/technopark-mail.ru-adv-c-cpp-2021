@@ -1,6 +1,7 @@
-#include "data/MySubString.h"
 #include <stdbool.h>
 #include <stdlib.h>
+
+#include "data/MySubString.h"
 
 bool isAlphaNumerical(char a) {
   return ((a >= '0' && a <= '9') || (a >= 'A' && a <= 'Z') ||
