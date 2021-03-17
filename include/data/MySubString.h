@@ -3,14 +3,13 @@
 #ifndef INCLUDE_MYSUBSTRING_MYSUBSTRING_H_
 #define INCLUDE_MYSUBSTRING_MYSUBSTRING_H_
 
-#include <stdio.h>
 #include <data/MyString.h>
+#include <stdio.h>
 
-typedef struct MySubString
-{
-    int startIndex;
-    MyString *string;
-    MyString *parentString;
+typedef struct MySubString {
+  int startIndex;
+  MyString *string;
+  MyString *parentString;
 } MySubString;
 
 MySubString *allocMySubString(size_t parentLen, size_t subLen);

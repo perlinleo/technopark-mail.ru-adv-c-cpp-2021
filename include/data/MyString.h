@@ -4,10 +4,9 @@
 #include <stdio.h>
 #define MAXSTRINGAMOUNT 10
 
-typedef struct MyString
-{
-    char *string;
-    size_t stringLen;
+typedef struct MyString {
+  char *string;
+  size_t stringLen;
 } MyString;
 
 MyString *allocMyString(size_t stringLen);
