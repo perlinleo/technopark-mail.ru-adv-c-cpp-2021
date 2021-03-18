@@ -15,3 +15,11 @@ TEST(allocMyString, correct) {
   ASSERT_EQ(11, test->stringLen);
   ASSERT_EQ(str, test->string);
 }
+
+/*
+TEST(freeString, check){
+  MyString* test = allocMyString(100);
+  freeString(test);
+  ASSERT_EQ(nullptr,test);
+}
+*/

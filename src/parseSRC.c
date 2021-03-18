@@ -41,7 +41,7 @@ size_t getSrcTags(MyString **userInput, size_t linesAmount, char *attrValue,
               "src=\"", 5, "\"", 1, htmlTag->string->string,
               htmlTag->string->stringLen);
           if (substr != NULL) {
-            printf("\n%s\n%s", htmlTag->string->string, substr->string->string);
+            // printf("\n%s\n%s", htmlTag->string->string, substr->string->string);
             result[counter] = newParsedInfo(htmlTag, substr);
             counter++;
           }
