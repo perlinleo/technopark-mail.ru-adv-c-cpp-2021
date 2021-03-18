@@ -30,9 +30,8 @@ int main() {
     userInput[0]->string="saddasda<htmltag src=\"check\" >";
     userInput[0]->stringLen=30;
     ParsedInfo **result =(ParsedInfo **)calloc(sizeof(ParsedInfo *), 1);
-    size_t filteredAmount = getSrcTags(userInput, linesAmount, 
-    "anyiguess??", result);
-    //ASSERT_EQ(filteredAmount,1);
+    size_t filteredAmount = getSrcTags(userInput, linesAmount,"anyiguess??", result);
+    // ASSERT_EQ(filteredAmount,1);
     // printParsedInfo(result[0]);
   return 0;
 }
