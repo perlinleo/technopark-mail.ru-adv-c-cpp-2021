@@ -1,5 +1,5 @@
-#ifndef INCLUDE_MYSTRING_MYRESULTSRC_H_
-#define INCLUDE_MYSTRING_MYRESULTSRC_H_
+#ifndef INCLUDE_DATA_PARSEDINFO_H_
+#define INCLUDE_DATA_PARSEDINFO_H_
 
 #include <data/MySubString.h>
 #include <stdio.h>

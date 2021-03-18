@@ -1,5 +1,5 @@
-#ifndef INCLUDE_MYSUBSTRING_MYSUBSTRING_H_
-#define INCLUDE_MYSUBSTRING_MYSUBSTRING_H_
+#ifndef INCLUDE_DATA_MYSUBSTRING_H_
+#define INCLUDE_DATA_MYSUBSTRING_H_
 
 #include <data/MyString.h>
 #include <stdio.h>

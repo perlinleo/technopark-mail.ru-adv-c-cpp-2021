@@ -10,7 +10,6 @@
 #include <data/ParsedInfo.h>
 #include <parser/parseFuncs.h>
 
-
 size_t getSrcTags(MyString **userInput, size_t linesAmount, char *attrValue,
                   ParsedInfo **result) {
   size_t counter = 0;
@@ -32,7 +31,7 @@ size_t getSrcTags(MyString **userInput, size_t linesAmount, char *attrValue,
           // printf("\ncheck symbol %c (%li)\n",
           // htmlTag->string->string[spacePlace], spacePlace);
           if (!(isAlphaNumerical(htmlTag->string->string[spacePlace]))) {
-            //<hellosrc check>
+            // <hellosrc check>
             break;
           }
         }
