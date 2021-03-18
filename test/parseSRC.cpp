@@ -54,6 +54,18 @@ TEST(getSrcTags, correct){
     ASSERT_EQ(filteredAmount,1);
 }
 
+TEST(getSrcTags, wrongHTMLtag){
+    MyString **userInput =
+      (MyString **)calloc(sizeof(MyString *), 1);
+    size_t linesAmount = 1;
+    userInput[0]=allocMyString(24);
+    userInput[0]->string="<dsdss\"***sda tagwithoutsrcattr>";
+    userInput[0]->stringLen=24;
+    ParsedInfo **result =(ParsedInfo **)calloc(sizeof(ParsedInfo *), 1);
+    size_t filteredAmount = getSrcTags(userInput, linesAmount, 
+    "anyiguess??", result);
+    ASSERT_EQ(filteredAmount,0);
+}
 
 
 
