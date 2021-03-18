@@ -15,4 +15,4 @@ ParsedInfo *newParsedInfo(MySubString *HTMLtag, MySubString *srcAttr);
 void freeParsedInfo(ParsedInfo *toFree);
 void printParsedInfo(ParsedInfo *ParsedInfo);
 
-#endif
+#endif  // INCLUDE_DATA_PARSEDINFO_H_

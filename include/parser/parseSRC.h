@@ -9,4 +9,4 @@
 size_t getSrcTags(MyString **userInput, size_t linesAmount, char *attrValue,
                   ParsedInfo **result);
 
-#endif
+#endif  // INCLUDE_PARSER_PARSESRC_H_

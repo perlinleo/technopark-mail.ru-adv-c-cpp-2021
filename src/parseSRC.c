@@ -9,9 +9,7 @@
 
 #include <data/ParsedInfo.h>
 #include <parser/parseFuncs.h>
-//#include <include/data/MyResultSrc.h>
 
-// printstringHighlightsbyIndexmoved to ParsedInfo.c
 
 size_t getSrcTags(MyString **userInput, size_t linesAmount, char *attrValue,
                   ParsedInfo **result) {

@@ -1,5 +1,3 @@
-
-
 #ifndef INCLUDE_MYSUBSTRING_MYSUBSTRING_H_
 #define INCLUDE_MYSUBSTRING_MYSUBSTRING_H_
 
@@ -17,4 +15,4 @@ MySubString *allocMySubString(size_t parentLen, size_t subLen);
 void freeMySubString(MySubString *substr);
 
 void printMySubString(MySubString *substr);
-#endif
+#endif  // INCLUDE_DATA_MYSUBSTRING_H_

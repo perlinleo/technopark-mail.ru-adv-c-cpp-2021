@@ -13,4 +13,4 @@ bool isAlphaNumerical(char a);
 int findPattern(char *pattern, char *string, size_t stringLength,
                 size_t patternLength, size_t startPoint);
 
-#endif
+#endif  // INCLUDE_PARSER_PARSEFUNCS_H_
