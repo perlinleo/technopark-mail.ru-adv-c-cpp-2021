@@ -9,6 +9,7 @@
 
 #define RAND_VALUE 40
 
+#define MAX_WORD_LENGTH 50
 /*
 typedef struct word{
     
@@ -18,7 +19,6 @@ typedef struct word{
 typedef struct hash_item_t {
     char *key;
     uint counter;
-    struct hash_item_t *next;
 } hash_item_t;
 
 typedef struct hashtable_t { 
@@ -35,7 +35,7 @@ uint create_hash (const char* key){
     for(int i = 0;i < strlen(key); ++i){
         hash = hash * RAND_VALUE + key[i];
     }
-    
+    printf("\nreal hash value:%u\n", hash);
     hash = hash % DEFAULT_TABLE_SIZE;
     
     return hash;
@@ -88,12 +88,8 @@ void add_value(hashtable_t* hashtable,const char*key){
         hashtable->hash_items[slot]->counter++;
         printf("\nfound %i times\n", hashtable->hash_items[slot]->counter);
     }
-
-
 }
 
-void delete_hash_table() {
-}
 
 
 int main(int argc, char**argv){
@@ -101,9 +97,9 @@ int main(int argc, char**argv){
     hashtable_t *ht = create_hash_table();
     while (1==1)
     {
-        scanf("%5s",string);
+        scanf("%50s",string);
         printf("%d\n", create_hash(string));
-        add_value(ht,string);    
+        add_value(ht,string);
     }
     
     printf("%d\n", create_hash("hello"));
