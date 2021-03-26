@@ -27,7 +27,7 @@ include_directories("${PROJECT_SOURCE_DIR}/tf_idf_lib/include")
 
 file(GLOB sources
         "${PROJECT_SOURCE_DIR}/tf_idf_lib/include/*.h"
-        "${PROJECT_SOURCE_DIR}/tf_idf_lib/source*.c")
+        "${PROJECT_SOURCE_DIR}/tf_idf_lib/source/*.c")
 # </Source>
 
 # <SOURCE_DIR>

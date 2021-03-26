@@ -62,37 +62,65 @@ hashtable_t *create_hash_table()
         return NULL;
     }
     new_hashtable->hash_items = calloc(sizeof(hash_item_t*) , DEFAULT_TABLE_SIZE);
+    if (new_hashtable->hash_items==NULL){
+        fprintf(stderr, "hashtable->hast_items allocation error!\n");
+        return NULL;
+    }
 
     return new_hashtable;
 }
 
 void add_value(hashtable_t* hashtable,const char*key){
-    size_t slot = create_hash(key);
-
-    hash_item_t *item = hashtable->hash_items[slot];
-
-    if (item==NULL) {
-        hashtable->hash_items[slot] = new_hash_item(key);
+    if(hashtable==NULL){
+        fprintf(stderr,"Can`t access hashtable");
     }
-    else {
-        printf("item found!");
-        hashtable->hash_items[slot]->counter++;
-        printf("\nfound %i times\n", hashtable->hash_items[slot]->counter);
-    }
-}
+    else{
+        size_t slot = create_hash(key);
 
-void print_hash_table(hashtable_t *hashtable){
-    for(int i =0; i<DEFAULT_TABLE_SIZE;i++){
-        if(hashtable->hash_items[i]!=NULL){
-            printf("\nWord: %s found %u times (hash=%x)\n", 
-                hashtable->hash_items[i]->key,
-                hashtable->hash_items[i]->counter,
-                i);
-            
+        hash_item_t *item = hashtable->hash_items[slot];
+
+        if (item==NULL) {
+            hashtable->hash_items[slot] = new_hash_item(key);
+        }
+        else {
+            printf("item found!");
+            hashtable->hash_items[slot]->counter++;
+            printf("\nfound %i times\n", hashtable->hash_items[slot]->counter);
         }
     }
 }
 
+void print_hash_table(hashtable_t *hashtable){
+    if(hashtable==NULL){
+        fprintf(stderr,"Can`t access hashtable");
+    }
+    else{
+        for(int i =0; i<DEFAULT_TABLE_SIZE;i++){
+            if(hashtable->hash_items[i]!=NULL){
+                printf("\nWord: %s found %u times (hash=%x)\n", 
+                    hashtable->hash_items[i]->key,
+                    hashtable->hash_items[i]->counter,
+                    i);
+                
+            }
+        }
+    }
+}
+
+uint counter_for_word_ex_ht(hashtable_t *hashtable, const char* word){
+    if(hashtable==NULL){
+        fprintf(stderr,"Can`t access hashtable!");
+    }
+    else if(word==NULL){
+        fprintf(stderr,"Can`t access given word");
+    }
+    else{
+        uint hash = create_hash(word);
+        if(hashtable->hash_items[hash]!=NULL){
+            return hashtable->hash_items[hash]->counter; 
+        }
+    }
+}
 
 
 
@@ -104,6 +132,7 @@ int main(int argc, char**argv){
         scanf("%50s",string);
         add_value(ht,string);
         print_hash_table(ht);
+        printf("word hello was found %i times" ,counter_for_word_ex_ht(ht,"hello"));
     }
     printf("%d\n", create_hash("hello"));
     return 0;
