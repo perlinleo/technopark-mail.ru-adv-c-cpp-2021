@@ -57,6 +57,7 @@ hashtable_t *create_hash_table()
     new_hashtable->hash_items = calloc(sizeof(hash_item_t*) , DEFAULT_TABLE_SIZE);
     if (new_hashtable->hash_items==NULL){
         fprintf(stderr, "hashtable->hast_items allocation error!\n");
+        free(new_hashtable);
         return NULL;
     }
 
