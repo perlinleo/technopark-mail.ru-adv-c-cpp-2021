@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/perlinleo/technopark-mail.ru-adv-c-cpp-2021.svg?branch=individual-task2)](https://travis-ci.org/perlinleo/technopark-mail.ru-adv-c-cpp-2021)
-
+[![codecov](https://codecov.io/gh/perlinleo/technopark-mail.ru-adv-c-cpp-2021/branch/master/graph/badge.svg?token=Y59PE2MGY9)](https://codecov.io/gh/perlinleo/technopark-mail.ru-adv-c-cpp-2021)
 # technopark-mail.ru-adv-c-cpp-2021
 ## Индивидуальное заданиe №2 по курсу "Углубленное программирование на C/C++"
 ## Перлин Леонид АПО-13
