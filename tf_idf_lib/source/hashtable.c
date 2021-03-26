@@ -1,7 +1,5 @@
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
 
+#include <hashtable.h>
 
 #define DEFAULT_TABLE_SIZE 150000
 //размер файла-> 1мб -> 1млн символов , при средней длинне слова в 4.5 буквы максимальное количество разных слов в одном файле=222222
@@ -16,14 +14,9 @@ typedef struct word{
 }
 */
 
-typedef struct hash_item_t {
-    char *key;
-    uint counter;
-} hash_item_t;
 
-typedef struct hashtable_t { 
-    hash_item_t **hash_items;
-} hashtable_t;
+
+
 
 
 uint create_hash (const char* key){
@@ -124,16 +117,3 @@ uint counter_for_word_ex_ht(hashtable_t *hashtable, const char* word){
 
 
 
-int main(int argc, char**argv){
-    char string[5];
-    hashtable_t *ht = create_hash_table();
-    while (1==1)
-    {
-        scanf("%50s",string);
-        add_value(ht,string);
-        print_hash_table(ht);
-        printf("word hello was found %i times" ,counter_for_word_ex_ht(ht,"hello"));
-    }
-    printf("%d\n", create_hash("hello"));
-    return 0;
-}
