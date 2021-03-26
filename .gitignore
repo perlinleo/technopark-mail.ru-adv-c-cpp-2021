@@ -1,3 +1,5 @@
-# CMake
-cmake-build-*/
+# Build Folder
 build/
+
+#Full test data folder
+data/

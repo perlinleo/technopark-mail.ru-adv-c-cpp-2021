@@ -35,19 +35,21 @@ uint create_hash (const char* key){
     for(int i = 0;i < strlen(key); ++i){
         hash = hash * RAND_VALUE + key[i];
     }
-    printf("\nreal hash value:%u\n", hash);
+
     hash = hash % DEFAULT_TABLE_SIZE;
-    
+    printf("\nreal hash value:%u\n", hash);
     return hash;
 }
 
 
 
-hash_item_t* new_hash_item(const uint *counter,const char* key){
+hash_item_t* new_hash_item(const char* key){
     hash_item_t *item = malloc(sizeof(hash_item_t));
     item->key = malloc(sizeof(uint));
-    counter=0;
+    item->counter=1;
     strcpy(item->key, key);
+
+    return item;
 }
 
 
@@ -59,18 +61,7 @@ hashtable_t *create_hash_table()
         fprintf(stderr, "hashtable allocation error!\n");
         return NULL;
     }
-
     new_hashtable->hash_items = calloc(sizeof(hash_item_t*) , DEFAULT_TABLE_SIZE);
-    
-
-    /*
-    for(int i = 0; i<DEFAULT_TABLE_SIZE; ++i) {
-        printf("i was: %p\n" ,new_hashtable->hash_items[i]);
-        new_hashtable->hash_items[i] = NULL;
-        printf("i am: %p\n" ,new_hashtable->hash_items[i]);
-    }
-
-    */
 
     return new_hashtable;
 }
@@ -81,7 +72,7 @@ void add_value(hashtable_t* hashtable,const char*key){
     hash_item_t *item = hashtable->hash_items[slot];
 
     if (item==NULL) {
-        hashtable->hash_items[slot] = new_hash_item(0,key);
+        hashtable->hash_items[slot] = new_hash_item(key);
     }
     else {
         printf("item found!");
@@ -89,6 +80,19 @@ void add_value(hashtable_t* hashtable,const char*key){
         printf("\nfound %i times\n", hashtable->hash_items[slot]->counter);
     }
 }
+
+void print_hash_table(hashtable_t *hashtable){
+    for(int i =0; i<DEFAULT_TABLE_SIZE;i++){
+        if(hashtable->hash_items[i]!=NULL){
+            printf("\nWord: %s found %u times (hash=%x)\n", 
+                hashtable->hash_items[i]->key,
+                hashtable->hash_items[i]->counter,
+                i);
+            
+        }
+    }
+}
+
 
 
 
@@ -98,10 +102,9 @@ int main(int argc, char**argv){
     while (1==1)
     {
         scanf("%50s",string);
-        printf("%d\n", create_hash(string));
         add_value(ht,string);
+        print_hash_table(ht);
     }
-    
     printf("%d\n", create_hash("hello"));
     return 0;
 }
