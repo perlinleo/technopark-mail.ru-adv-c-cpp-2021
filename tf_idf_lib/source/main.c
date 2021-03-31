@@ -18,12 +18,9 @@ int main(int argc, char **argv) {
   */
 
   system("pwd");
-  hashtable_t * TF_ALL_DOCS_UNIQUE= create_hash_table();
-  fill_hashtable_from_dir("../data/", TF_ALL_DOCS_UNIQUE, UNIQUE);
   hashtable_t * TF_ALL_DOCS= create_hash_table();
-  fill_hashtable_from_dir("../data/", TF_ALL_DOCS, NOT_UNIQUE);
-  print_hash_table(TF_ALL_DOCS_UNIQUE);
+  fill_hashtable_from_dir("../data/", TF_ALL_DOCS);
   print_hash_table(TF_ALL_DOCS);
-  count_idf(TF_ALL_DOCS_UNIQUE,"clown",3);
+  // count_idf(TF_ALL_DOCS,"clown",3);
   return 0;
 }
