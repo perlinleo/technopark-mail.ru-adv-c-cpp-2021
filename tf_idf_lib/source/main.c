@@ -19,7 +19,7 @@ int main(int argc, char **argv) {
 
   system("pwd");
   hashtable_t * hashtable= create_hash_table();
-  fill_hashtable_from_dir("../data/", hashtable);
+  fill_hashtable_from_dir("../data/", hashtable, UNIQUE);
   print_hash_table(hashtable);
   return 0;
 }

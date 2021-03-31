@@ -10,8 +10,14 @@
 #include <hashtable.h>
 #include <dirent.h>
 
-size_t fill_hashtable_from_file(const char* path,hashtable_t* hashtable);
 
-size_t fill_hashtable_from_dir(const char* path, hashtable_t* hashtable_t);
+#define BUF_SIZE 50
+#define BUF_SIZE_PATH 255
+#define UNIQUE 1
+#define NOT_UNIQUE 0
+
+size_t fill_hashtable_from_file(const char* path,hashtable_t* hashtable, char* doc_verbose);
+
+size_t fill_hashtable_from_dir(const char* path, hashtable_t* hashtable_t, short unique);
 
 #endif  // INCLUDE_DATA_READ_DATA_H_

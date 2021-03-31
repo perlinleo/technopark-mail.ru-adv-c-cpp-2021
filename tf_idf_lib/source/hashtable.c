@@ -17,19 +17,15 @@ typedef struct word{
 }
 */
 
-unsigned int create_hash(const char *key) {
-  unsigned int hash = 0;
+unsigned int create_hash(const char *str)
+{
+    unsigned long hash = RAND_VALUE;
+    int c;
 
-  // printf("\n%zu\n", strlen(key));
-  // strlen check works fine but max_length must be enough
+    while (c = *str++)
+        hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
 
-  for (int i = 0; i < strlen(key); ++i) {
-    hash = hash * RAND_VALUE + key[i];
-  }
-
-  hash = hash % DEFAULT_TABLE_SIZE;
-  printf("\nreal hash value:%u\n", hash);
-  return hash;
+    return hash%150000000;
 }
 
 hash_item_t *new_hash_item(const char *key) {
@@ -38,7 +34,7 @@ hash_item_t *new_hash_item(const char *key) {
     fprintf(stderr, "insufficient memory available/new_hash_item");
     return NULL;
   }
-  item->key = malloc(sizeof(unsigned int));
+  item->key = malloc(strlen(key) * sizeof(char) + 1);
   if (item->key == NULL) {
     fprintf(stderr, "insufficient memory available/new_hash_item");
     free(item);
@@ -55,6 +51,12 @@ hashtable_t *create_hash_table() {
   hashtable_t *new_hashtable = malloc(sizeof(hashtable_t));
   if (new_hashtable == NULL) {
     fprintf(stderr, "hashtable allocation error!\n");
+    return NULL;
+  }
+  new_hashtable->document = malloc(255* sizeof(char));
+  if (new_hashtable->document == NULL) {
+    fprintf(stderr, "insufficient memory new_hashtable->document");
+    free(new_hashtable);
     return NULL;
   }
   new_hashtable->hash_items = calloc(sizeof(hash_item_t *), DEFAULT_TABLE_SIZE);
@@ -78,9 +80,7 @@ void add_value(hashtable_t *hashtable, const char *key) {
     if (item == NULL) {
       hashtable->hash_items[slot] = new_hash_item(key);
     } else {
-      printf("item found!");
       hashtable->hash_items[slot]->counter++;
-      printf("\nfound %i times\n", hashtable->hash_items[slot]->counter);
     }
   }
 }

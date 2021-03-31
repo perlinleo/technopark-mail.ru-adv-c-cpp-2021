@@ -9,11 +9,13 @@
 #include <string.h>
 
 typedef struct hash_item_t {
+  
   char* key;
   unsigned int counter;
 } hash_item_t;
 
 typedef struct hashtable_t {
+  char* document;
   hash_item_t** hash_items;
 } hashtable_t;
 
