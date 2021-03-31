@@ -8,7 +8,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <hashtable.h>
+#include <dirent.h>
 
 size_t fill_hashtable_from_file(const char* path,hashtable_t* hashtable);
+
+size_t fill_hashtable_from_dir(const char* path, hashtable_t* hashtable_t);
 
 #endif  // INCLUDE_DATA_READ_DATA_H_

@@ -23,6 +23,25 @@ size_t fill_hashtable_from_file(const char* path,hashtable_t* hashtable){
     return counter;
 }
 
+size_t fill_hashtable_from_dir(const char* path, hashtable_t* hashtable_t){
+    DIR *directory;
+    struct dirent *dir;
+    char buff[BUF_SIZE];
+    directory = opendir(path);
+    if(directory)
+    {
+        while ((dir = readdir(directory))!=0){
+            if(strstr(dir->d_name,".txt")){
+                printf("\nFilling from %s\n",dir->d_name);
+                sprintf(buff, "%s%s",path, dir->d_name);
+                printf(buff);
+                fill_hashtable_from_file(buff,hashtable_t);
+            }
+        }
+    }
+    return 0;
+}
+
 
 
 

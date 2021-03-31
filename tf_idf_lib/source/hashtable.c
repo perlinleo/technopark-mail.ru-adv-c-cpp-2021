@@ -3,7 +3,8 @@
 
 #include <hashtable.h>
 
-#define DEFAULT_TABLE_SIZE 150000
+#define DEFAULT_TABLE_SIZE 150000000
+                           
 // размер файла-> 1мб -> 1млн символов , при средней длинне слова в 4.5 буквы
 // максимальное количество разных слов в одном файле=222222 222222
 
@@ -16,8 +17,8 @@ typedef struct word{
 }
 */
 
-uint create_hash(const char *key) {
-  uint hash = 0;
+unsigned int create_hash(const char *key) {
+  unsigned int hash = 0;
 
   // printf("\n%zu\n", strlen(key));
   // strlen check works fine but max_length must be enough
@@ -32,12 +33,12 @@ uint create_hash(const char *key) {
 }
 
 hash_item_t *new_hash_item(const char *key) {
-  hash_item_t *item = malloc(sizeof(hash_item_t) * 1);
+  hash_item_t *item = malloc(sizeof(hash_item_t*));
   if (item == NULL) {
     fprintf(stderr, "insufficient memory available/new_hash_item");
     return NULL;
   }
-  item->key = malloc(sizeof(uint));
+  item->key = malloc(sizeof(unsigned int));
   if (item->key == NULL) {
     fprintf(stderr, "insufficient memory available/new_hash_item");
     free(item);
@@ -97,13 +98,13 @@ void print_hash_table(hashtable_t *hashtable) {
   }
 }
 
-uint counter_for_word_ex_ht(hashtable_t *hashtable, const char *word) {
+unsigned int counter_for_word_ex_ht(hashtable_t *hashtable, const char *word) {
   if (hashtable == NULL) {
     fprintf(stderr, "Can`t access hashtable!");
   } else if (word == NULL) {
     fprintf(stderr, "Can`t access given word");
   } else {
-    uint hash = create_hash(word);
+    unsigned int hash = create_hash(word);
     if (hashtable->hash_items[hash] != NULL) {
       return hashtable->hash_items[hash]->counter;
     }
