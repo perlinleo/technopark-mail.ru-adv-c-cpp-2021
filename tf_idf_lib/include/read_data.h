@@ -16,6 +16,9 @@
 #define UNIQUE 1
 #define NOT_UNIQUE 0
 
+
+float count_idf(hashtable_t* hashtable, const char* word,size_t dir_size);
+
 size_t fill_hashtable_from_file(const char* path,hashtable_t* hashtable, char* doc_verbose);
 
 size_t fill_hashtable_from_dir(const char* path, hashtable_t* hashtable_t, short unique);

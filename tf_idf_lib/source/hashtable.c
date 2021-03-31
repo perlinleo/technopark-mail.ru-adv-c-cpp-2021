@@ -25,7 +25,7 @@ unsigned int create_hash(const char *str)
     while (c = *str++)
         hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
 
-    return hash%150000000;
+    return hash%DEFAULT_TABLE_SIZE;
 }
 
 hash_item_t *new_hash_item(const char *key) {
@@ -40,7 +40,7 @@ hash_item_t *new_hash_item(const char *key) {
     free(item);
     return NULL;
   }
-  item->counter = 1;
+  item->counter = 1.0;
   snprintf(item->key, strlen(key) * sizeof(char) + 1, "%s", key);
   // strcpy(item->key, key);
 
@@ -80,7 +80,7 @@ void add_value(hashtable_t *hashtable, const char *key) {
     if (item == NULL) {
       hashtable->hash_items[slot] = new_hash_item(key);
     } else {
-      hashtable->hash_items[slot]->counter++;
+      hashtable->hash_items[slot]->counter+=1.0;
     }
   }
 }
@@ -91,7 +91,7 @@ void print_hash_table(hashtable_t *hashtable) {
   } else {
     for (int i = 0; i < DEFAULT_TABLE_SIZE; i++) {
       if (hashtable->hash_items[i] != NULL) {
-        printf("%s found %u times (hash:0x%x)\n", hashtable->hash_items[i]->key,
+        printf("%s found %f times (hash:0x%x)\n", hashtable->hash_items[i]->key,
                hashtable->hash_items[i]->counter, i);
       }
     }
