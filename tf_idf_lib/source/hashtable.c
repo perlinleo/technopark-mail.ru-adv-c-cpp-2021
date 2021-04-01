@@ -22,7 +22,7 @@ unsigned int create_hash(const char *str)
 }
 
 hash_item_t *new_hash_item(const char *key) {
-  hash_item_t *item = malloc(sizeof(hash_item_t*));
+  hash_item_t *item = malloc(sizeof(hash_item_t));
   if (item == NULL) {
     fprintf(stderr, "insufficient memory available/new_hash_item");
     return NULL;
@@ -44,12 +44,6 @@ hashtable_t *create_hash_table() {
   hashtable_t *new_hashtable = malloc(sizeof(hashtable_t));
   if (new_hashtable == NULL) {
     fprintf(stderr, "hashtable allocation error!\n");
-    return NULL;
-  }
-  new_hashtable->document = malloc(255* sizeof(char));
-  if (new_hashtable->document == NULL) {
-    fprintf(stderr, "insufficient memory new_hashtable->document");
-    free(new_hashtable);
     return NULL;
   }
   new_hashtable->hash_items = calloc(sizeof(hash_item_t *), DEFAULT_TABLE_SIZE);
@@ -91,6 +85,7 @@ void print_hash_table(hashtable_t *hashtable) {
   }
 }
 
+/*
 unsigned int counter_for_word_ex_ht(hashtable_t *hashtable, const char *word) {
   if (hashtable == NULL) {
     fprintf(stderr, "Can`t access hashtable!");
@@ -103,3 +98,4 @@ unsigned int counter_for_word_ex_ht(hashtable_t *hashtable, const char *word) {
     }
   }
 }
+*/

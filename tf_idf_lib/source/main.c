@@ -19,8 +19,7 @@ int main(int argc, char **argv) {
 
   system("pwd");
   hashtable_t * TF_ALL_DOCS= create_hash_table();
-  fill_hashtable_from_dir("../data/", TF_ALL_DOCS);
+  get_tf_idf_from_dir("../data/", TF_ALL_DOCS);
   print_hash_table(TF_ALL_DOCS);
-  // count_idf(TF_ALL_DOCS,"clown",3);
   return 0;
 }
