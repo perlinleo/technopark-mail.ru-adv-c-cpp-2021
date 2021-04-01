@@ -3,22 +3,19 @@
 
 #include <hashtable.h>
 
-
 /*
 typedef struct word{
 
 }
 */
 
-unsigned int create_hash(const char *str)
-{
-    unsigned long hash = RAND_VALUE;
-    int c;
+unsigned int create_hash(const char *str) {
+  unsigned long hash = RAND_VALUE;
+  int c;
 
-    while (c = *str++)
-        hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
+  while (c = *str++) hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
 
-    return hash%DEFAULT_TABLE_SIZE;
+  return hash % DEFAULT_TABLE_SIZE;
 }
 
 hash_item_t *new_hash_item(const char *key) {
@@ -67,7 +64,7 @@ void add_value(hashtable_t *hashtable, const char *key) {
     if (item == NULL) {
       hashtable->hash_items[slot] = new_hash_item(key);
     } else {
-      hashtable->hash_items[slot]->counter+=1.0;
+      hashtable->hash_items[slot]->counter += 1.0;
     }
   }
 }

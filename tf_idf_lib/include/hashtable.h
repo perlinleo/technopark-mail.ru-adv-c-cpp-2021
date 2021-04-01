@@ -9,7 +9,7 @@
 #include <string.h>
 
 #define DEFAULT_TABLE_SIZE 150000000
-                           
+
 // размер файла-> 1мб -> 1млн символов , при средней длинне слова в 4.5 буквы
 // максимальное количество разных слов в одном файле=222222 222222
 
@@ -18,7 +18,6 @@
 #define MAX_WORD_LENGTH 50
 
 typedef struct hash_item_t {
-  
   char* key;
   float counter;
 } hash_item_t;
