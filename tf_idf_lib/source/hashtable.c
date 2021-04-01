@@ -20,19 +20,19 @@ unsigned int create_hash(const char *str) {
     hash*=-1;
   }
   hash = hash% DEFAULT_TABLE_SIZE;
-  printf("%i %i\n", hash, DEFAULT_TABLE_SIZE);
+  // printf("%i %i\n", hash, DEFAULT_TABLE_SIZE);
   return (hash );
 }
 
 hash_item_t *new_hash_item(const char *key) {
   hash_item_t *item = malloc(sizeof(hash_item_t));
   if (item == NULL) {
-    fprintf(stderr, "insufficient memory available/new_hash_item");
+    printf("insufficient memory available/new_hash_item");
     return NULL;
   }
   item->key = malloc(strlen(key) * sizeof(char) + 1);
   if (item->key == NULL) {
-    fprintf(stderr, "insufficient memory available/new_hash_item");
+    printf("insufficient memory available/new_hash_item");
     free(item);
     return NULL;
   }
@@ -44,17 +44,21 @@ hash_item_t *new_hash_item(const char *key) {
 }
 
 hashtable_t *create_hash_table() {
-  hashtable_t *new_hashtable = malloc(sizeof(hashtable_t));
+  system("pwd");
+  hashtable_t *new_hashtable = (hashtable_t*)malloc(sizeof(hashtable_t));
+  system("pwd");
   if (new_hashtable == NULL) {
     fprintf(stderr, "hashtable allocation error!\n");
-    return NULL;
+    return;
   }
-  new_hashtable->hash_items = calloc(sizeof(hash_item_t *), DEFAULT_TABLE_SIZE);
+  system("pwd");
+  new_hashtable->hash_items = (hash_item_t**)calloc(sizeof(hash_item_t *), DEFAULT_TABLE_SIZE);
   if (new_hashtable->hash_items == NULL) {
     fprintf(stderr, "hashtable->hast_items allocation error!\n");
     free(new_hashtable);
-    return NULL;
+    return;
   }
+  system("pwd");
 
   return new_hashtable;
 }
@@ -81,7 +85,7 @@ void print_hash_table(hashtable_t *hashtable) {
   } else {
     for (int i = 0; i < DEFAULT_TABLE_SIZE; i++) {
       if (hashtable->hash_items[i] != NULL) {
-        printf("%s found %f times (hash:0x%x)\n", hashtable->hash_items[i]->key,
+        printf("%s has value of %f (hash: 0x%x )\n", hashtable->hash_items[i]->key,
                hashtable->hash_items[i]->counter, i);
       }
     }

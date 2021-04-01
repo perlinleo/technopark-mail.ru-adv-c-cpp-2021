@@ -6,7 +6,7 @@
 size_t fill_hashtable_from_file(const char* path, hashtable_t* hashtable,
                                 char* doc_verbose) {
   if (hashtable == NULL) {
-    fprintf(stderr, "can`t access given hashtable");
+    printf("Can`t access given hashtable\n");
     return NULL;
   }
   int counter = count_words(path, hashtable, doc_verbose);
@@ -31,7 +31,7 @@ size_t get_tf_idf_from_dir(const char* path, hashtable_t* hashtable_t) {
 
   char** queries = malloc(sizeof(char*) * MAX_FILES_AMOUNT);
   if (queries == NULL) {
-    printf("Can`t alloc space for files array");
+    printf("Can`t alloc space for files array\n");
   }
 
   // получаю пути к файлам
@@ -76,22 +76,22 @@ size_t get_tf_idf_from_dir(const char* path, hashtable_t* hashtable_t) {
 
 size_t get_top_5_for_doc(hashtable_t* hashtable, const char* doc_verbose){
   char doc[MAX_FILENAME];
-  char** strings_from_doc = malloc(sizeof(char*)*MAX_WORD_COUNT);
+  string_val** strings_from_doc = malloc(sizeof(string_val*)*MAX_WORD_COUNT);
   int counter=0;
 
   snprintf(doc,MAX_FILENAME,"%s.txt",doc_verbose);
   for (int i = 0; i < DEFAULT_TABLE_SIZE; i++) {
         if (hashtable->hash_items[i] != NULL) {
           if(strstr(hashtable->hash_items[i]->key, doc)){
-            strings_from_doc[counter]=malloc(sizeof(char)*MAX_WORD_LENGTH);
-            snprintf(strings_from_doc[counter],MAX_WORD_LENGTH,"%s",
+            strings_from_doc[counter]=malloc(sizeof(string_val));
+            strings_from_doc[counter]->key=malloc(sizeof(char)*MAX_WORD_LENGTH);
+            snprintf(strings_from_doc[counter]->key,MAX_WORD_LENGTH,"%s",
                               hashtable->hash_items[i]->key);
+            strings_from_doc[counter]->val=hashtable->hash_items[i]->counter;
             counter++;
           }
         }
       }
-  for(int i =0; i<counter;++i){
-    printf(strings_from_doc[i]);
-    printf("\n\n");
-  }
+  sort_string_val_array(strings_from_doc,counter);
+  print_top_5(strings_from_doc);
 }
