@@ -10,7 +10,7 @@ typedef struct word{
 */
 
 unsigned int create_hash(const char *str) {
-  unsigned long hash = RAND_VALUE;
+  __int64_t hash = RAND_VALUE;
   int c;
 
   while (c = *str++) hash = ((hash << 5) + hash) + c; /* hash * 33 + c */

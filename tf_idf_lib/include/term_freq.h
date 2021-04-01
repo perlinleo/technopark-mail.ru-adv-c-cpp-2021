@@ -1,3 +1,6 @@
+// Copyright 2021 Leonid Vadimovich Perlin perlinleo@gmail.com.
+// All rights reserved.
+
 #ifndef INCLUDE_TERM_FREQ_H_
 #define INCLUDE_TERM_FREQ_H_
 
@@ -19,4 +22,4 @@ size_t tf_idf_metrics(const char* path, hashtable_t* hashtable,
 
 size_t count_words(const char* path, hashtable_t* hashtable, char* doc_verbose);
 
-#endif // INCLUDE_TERM_FREQ_H_
+#endif  // INCLUDE_TERM_FREQ_H_

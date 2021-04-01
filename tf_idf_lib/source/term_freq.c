@@ -1,3 +1,5 @@
+// Copyright 2021 Leonid Vadimovich Perlin perlinleo@gmail.com.
+// All rights reserved.
 
 #include <term_freq.h>
 
@@ -17,8 +19,9 @@ size_t count_words(const char* path, hashtable_t* hashtable,
   while (fscanf(current_file, "%49s", buff) != EOF) {
     if (doc_verbose != NULL) {
       // printf("\n%s_%s\n",buff,doc_verbose);
-      strcat(buff, "_DOC_");
-      strcat(buff, doc_verbose);
+      snprintf(buff, BUF_SIZE, "_DOC_%s", doc_verbose);
+      // strcat(buff, "_DOC_");
+      // strcat(buff, doc_verbose);
     }
     add_value(hashtable, buff);
     ++counter;
@@ -81,7 +84,8 @@ float count_idf(hashtable_t* hashtable, const char* word, size_t dir_size,
                 char* doc_verbose) {
   char* buff = malloc(sizeof(char) * BUF_SIZE);
   char* wordCopy = malloc(sizeof(char) * BUF_SIZE);
-  strcpy(wordCopy, word);
+
+  snprintf(wordCopy, MAX_WORD_LENGTH, "%s", word);
   int len = strlen(word);
   wordCopy[len - 10] = '\0';
   float idf_val = 0;

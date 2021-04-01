@@ -1,3 +1,6 @@
+// Copyright 2021 Leonid Vadimovich Perlin perlinleo@gmail.com.
+// All rights reserved.
+
 #include <read_data.h>
 
 size_t fill_hashtable_from_file(const char* path, hashtable_t* hashtable,
@@ -35,7 +38,6 @@ size_t get_tf_idf_from_dir(const char* path, hashtable_t* hashtable_t) {
 
   if (directory) {
     struct dirent* dir;
-    char buff[BUF_SIZE_PATH];
     while ((dir = readdir(directory)) != 0) {
       if (strstr(dir->d_name, ".txt")) {
         /*
@@ -47,7 +49,8 @@ size_t get_tf_idf_from_dir(const char* path, hashtable_t* hashtable_t) {
         */
         queries[files_amount] = malloc(sizeof(char) * MAX_FILENAME);
         // snprintf(buff, "%s%s", path, dir->d_name);
-        snprintf(queries[files_amount],MAX_FILENAME,"%s%s", path, dir->d_name);
+        snprintf(queries[files_amount], MAX_FILENAME, "%s%s", path,
+                 dir->d_name);
         files_amount++;
       } else {
         printf("\n%s isn`t .txt\n", dir->d_name);
@@ -55,12 +58,12 @@ size_t get_tf_idf_from_dir(const char* path, hashtable_t* hashtable_t) {
     }
     char doc_name[MAX_FILENAME];
     for (int i = 0; i < files_amount; ++i) {
-      snprintf(doc_name, MAX_FILENAME,"%i.txt", i + 1);
+      snprintf(doc_name, MAX_FILENAME, "%i.txt", i + 1);
       printf("%s\n", doc_name);
       fill_hashtable_from_file(queries[i], hashtable_t, doc_name);
     }
     for (int i = 0; i < files_amount; ++i) {
-      snprintf(doc_name, MAX_FILENAME,"%i.txt", i + 1);
+      snprintf(doc_name, MAX_FILENAME, "%i.txt", i + 1);
       tf_idf_metrics(queries[i], hashtable_t, doc_name, files_amount);
     }
     for (int i = 0; i < files_amount; ++i) {
