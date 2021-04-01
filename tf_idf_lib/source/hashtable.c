@@ -14,7 +14,6 @@ unsigned int create_hash(const char *str) {
     hash *= -1;
   }
   hash = hash % DEFAULT_TABLE_SIZE;
-  
   return (hash);
 }
 
@@ -33,7 +32,6 @@ hash_item_t *new_hash_item(const char *key) {
   item->counter = 1.0;
   snprintf(item->key, strlen(key) * sizeof(char) + 1, "%s", key);
   
-
   return item;
 }
 

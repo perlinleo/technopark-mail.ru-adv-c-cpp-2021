@@ -11,6 +11,8 @@
 #include <string.h>
 #include <string_val.h>
 #include <term_freq.h>
+#include <dlfcn.h>
+#include <time.h>
 
 #define BUF_SIZE_PATH 255
 #define MAX_WORD_LENGTH 50
