@@ -13,9 +13,7 @@ size_t fill_hashtable_from_file(const char* path, hashtable_t* hashtable,
       print_hash_table(hashtable);
       printf("Succesefully calculated TF metrics\n");
     }
-  }
-
-  else {
+  } else {
     printf("No words found!\n");
   }
 
@@ -48,21 +46,21 @@ size_t get_tf_idf_from_dir(const char* path, hashtable_t* hashtable_t) {
         fill_hashtable_from_file(buff,hashtable_t, dir->d_name);
         */
         queries[files_amount] = malloc(sizeof(char) * MAX_FILENAME);
-        sprintf(buff, "%s%s", path, dir->d_name);
-        strcpy(queries[files_amount], buff);
+        // snprintf(buff, "%s%s", path, dir->d_name);
+        snprintf(queries[files_amount],MAX_FILENAME,"%s%s", path, dir->d_name);
         files_amount++;
       } else {
         printf("\n%s isn`t .txt\n", dir->d_name);
       }
     }
-    char doc_name[7];
+    char doc_name[MAX_FILENAME];
     for (int i = 0; i < files_amount; ++i) {
-      sprintf(doc_name, "%i.txt", i + 1);
+      snprintf(doc_name, MAX_FILENAME,"%i.txt", i + 1);
       printf("%s\n", doc_name);
       fill_hashtable_from_file(queries[i], hashtable_t, doc_name);
     }
     for (int i = 0; i < files_amount; ++i) {
-      sprintf(doc_name, "%i.txt", i + 1);
+      snprintf(doc_name, MAX_FILENAME,"%i.txt", i + 1);
       tf_idf_metrics(queries[i], hashtable_t, doc_name, files_amount);
     }
     for (int i = 0; i < files_amount; ++i) {
