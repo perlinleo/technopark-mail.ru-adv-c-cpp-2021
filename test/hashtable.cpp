@@ -34,12 +34,10 @@ int compareFile(FILE* file_compared, FILE* file_checked)
 
 TEST(dataset_TF_IDF, small){
   // FILE* stream = freopen( "../prog.log", "w", stdout );
-  fprintf( stdout, "successfully reassigned\n" );
+  
   hashtable_t *TF_ALL_DOCS = create_hash_table();
   int a = get_tf_idf_from_dir("../../data/", TF_ALL_DOCS);
   ASSERT_EQ(a,3);
-  print_hash_table(TF_ALL_DOCS);
-  a = get_top_5_for_doc(TF_ALL_DOCS,"1");
-  ASSERT_EQ(a,1);
+
   // fclose( stream );
 }

@@ -91,11 +91,10 @@ float count_idf(hashtable_t* hashtable, const char* word, size_t dir_size,
 
   for (int i = 1; i <= dir_size; ++i) {
     snprintf(buff, BUF_SIZE * sizeof(char), "%s_DOC_%i.txt", wordCopy, i);
-    // printf("CHECKING %s\n\n", buff);
     unsigned int hash = create_hash(buff);
     hash_item_t* item = hashtable->hash_items[hash];
     if (item == NULL) {
-      // fprintf(stderr,"There is no %s in a given hashtable!\n",buff);
+      // нет
     } else {
       idf_val += 1.0;
     }

@@ -3,12 +3,6 @@
 
 #include <hashtable.h>
 
-/*
-typedef struct word{
-
-}
-*/
-
 unsigned int create_hash(const char *str) {
   __int64_t hash = RAND_VALUE;
   int c;
@@ -20,7 +14,7 @@ unsigned int create_hash(const char *str) {
     hash *= -1;
   }
   hash = hash % DEFAULT_TABLE_SIZE;
-  // printf("%i %i\n", hash, DEFAULT_TABLE_SIZE);
+  
   return (hash);
 }
 
@@ -38,7 +32,7 @@ hash_item_t *new_hash_item(const char *key) {
   }
   item->counter = 1.0;
   snprintf(item->key, strlen(key) * sizeof(char) + 1, "%s", key);
-  // strcpy(item->key, key);
+  
 
   return item;
 }
@@ -94,17 +88,4 @@ void print_hash_table(hashtable_t *hashtable) {
   }
 }
 
-/*
-unsigned int counter_for_word_ex_ht(hashtable_t *hashtable, const char *word) {
-  if (hashtable == NULL) {
-    fprintf(stderr, "Can`t access hashtable!");
-  } else if (word == NULL) {
-    fprintf(stderr, "Can`t access given word");
-  } else {
-    unsigned int hash = create_hash(word);
-    if (hashtable->hash_items[hash] != NULL) {
-      return hashtable->hash_items[hash]->counter;
-    }
-  }
-}
-*/
+

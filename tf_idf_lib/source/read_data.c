@@ -40,15 +40,7 @@ size_t get_tf_idf_from_dir(const char* path, hashtable_t* hashtable_t) {
     struct dirent* dir;
     while ((dir = readdir(directory)) != 0) {
       if (strstr(dir->d_name, ".txt")) {
-        /*
-        files_amount++;
-        printf("\nFilling from %s\n",dir->d_name);
-        sprintf(buff, "%s%s",path, dir->d_name);
-        printf(buff);
-        fill_hashtable_from_file(buff,hashtable_t, dir->d_name);
-        */
         queries[files_amount] = malloc(sizeof(char) * MAX_FILENAME);
-        // snprintf(buff, "%s%s", path, dir->d_name);
         snprintf(queries[files_amount], MAX_FILENAME, "%s%s", path,
                  dir->d_name);
         files_amount++;
