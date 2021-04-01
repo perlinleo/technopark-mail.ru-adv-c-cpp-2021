@@ -13,9 +13,15 @@ unsigned int create_hash(const char *str) {
   __int64_t hash = RAND_VALUE;
   int c;
 
-  while (c = *str++) hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
-
-  return hash % DEFAULT_TABLE_SIZE;
+  while (c = *str++) {
+    hash = ((hash << 5) + hash) + c; 
+  }
+  if(hash<0){
+    hash*=-1;
+  }
+  hash = hash% DEFAULT_TABLE_SIZE;
+  printf("%i %i\n", hash, DEFAULT_TABLE_SIZE);
+  return (hash );
 }
 
 hash_item_t *new_hash_item(const char *key) {
@@ -57,7 +63,7 @@ void add_value(hashtable_t *hashtable, const char *key) {
   if (hashtable == NULL) {
     fprintf(stderr, "Can`t access hashtable");
   } else {
-    size_t slot = create_hash(key);
+    unsigned int slot = create_hash(key);
 
     hash_item_t *item = hashtable->hash_items[slot];
 

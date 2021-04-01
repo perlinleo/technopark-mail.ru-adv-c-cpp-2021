@@ -73,3 +73,25 @@ size_t get_tf_idf_from_dir(const char* path, hashtable_t* hashtable_t) {
   free(queries);
   return files_amount;
 }
+
+size_t get_top_5_for_doc(hashtable_t* hashtable, const char* doc_verbose){
+  char doc[MAX_FILENAME];
+  char** strings_from_doc = malloc(sizeof(char*)*MAX_WORD_COUNT);
+  int counter=0;
+
+  snprintf(doc,MAX_FILENAME,"%s.txt",doc_verbose);
+  for (int i = 0; i < DEFAULT_TABLE_SIZE; i++) {
+        if (hashtable->hash_items[i] != NULL) {
+          if(strstr(hashtable->hash_items[i]->key, doc)){
+            strings_from_doc[counter]=malloc(sizeof(char)*MAX_WORD_LENGTH);
+            snprintf(strings_from_doc[counter],MAX_WORD_LENGTH,"%s",
+                              hashtable->hash_items[i]->key);
+            counter++;
+          }
+        }
+      }
+  for(int i =0; i<counter;++i){
+    printf(strings_from_doc[i]);
+    printf("\n\n");
+  }
+}

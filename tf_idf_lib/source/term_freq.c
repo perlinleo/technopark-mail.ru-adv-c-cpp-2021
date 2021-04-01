@@ -18,12 +18,11 @@ size_t count_words(const char* path, hashtable_t* hashtable,
   char* buff = malloc(sizeof(char) * BUF_SIZE);
   while (fscanf(current_file, "%49s", buff) != EOF) {
     if (doc_verbose != NULL) {
-      // printf("\n%s_%s\n",buff,doc_verbose);
-      snprintf(buff, BUF_SIZE, "_DOC_%s", doc_verbose);
-      // strcat(buff, "_DOC_");
-      // strcat(buff, doc_verbose);
+      strcat(buff, "_DOC_");
+      strcat(buff, doc_verbose);
+      add_value(hashtable, buff);
     }
-    add_value(hashtable, buff);
+    
     ++counter;
   }
   fclose(current_file);

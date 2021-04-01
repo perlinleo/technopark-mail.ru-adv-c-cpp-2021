@@ -8,7 +8,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define DEFAULT_TABLE_SIZE 150000000
+#define DEFAULT_TABLE_SIZE 1000000
+                           
 
 // размер файла-> 1мб -> 1млн символов , при средней длинне слова в 4.5 буквы
 // максимальное количество разных слов в одном файле=222222 222222
