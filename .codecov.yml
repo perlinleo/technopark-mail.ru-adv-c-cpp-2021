@@ -1,0 +1,3 @@
+ignore:
+  - "tf_idf_lib/source/main.c"
+  - "test"
