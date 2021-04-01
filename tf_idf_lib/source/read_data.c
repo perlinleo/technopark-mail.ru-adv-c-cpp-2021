@@ -1,8 +1,7 @@
 #include <read_data.h>
 
 
-#include <stdio.h>
-#include <stdlib.h>
+
 
 size_t fill_hashtable_from_file(const char* path,hashtable_t* hashtable, char* doc_verbose){
     if(hashtable==NULL){
@@ -10,11 +9,16 @@ size_t fill_hashtable_from_file(const char* path,hashtable_t* hashtable, char* d
         return NULL;
     }
     int counter = count_words_from_file(path, hashtable, doc_verbose);
+    print_hash_table(hashtable);
+    printf("_______________________________\n\n");
     if(counter>0){
-        if(tf_metrics_from_file(path,hashtable,doc_verbose,counter)){
+        if(tf_metrics_from_file(path,hashtable,doc_verbose,counter)>0){
+            printf("_______________________________\n\n");
+            print_hash_table(hashtable);
             printf("Succesefully calculated TF metrics\n");
         }
     }
+    
     else{
         printf("No words found!\n");
     }
@@ -37,7 +41,7 @@ size_t count_words_from_file(const char* path,hashtable_t* hashtable,char* doc_v
     while(fscanf(current_file,"%49s",buff)!=EOF)
     {
         if(doc_verbose!=NULL){
-            printf("\n%s_%s\n",buff,doc_verbose);
+            // printf("\n%s_%s\n",buff,doc_verbose);
             strcat(buff, "_DOC_");
             strcat(buff, doc_verbose);
         }
@@ -57,19 +61,18 @@ size_t tf_metrics_from_file(const char* path,hashtable_t* hashtable,char* doc_ve
         return NULL;
     }
     char *buff = malloc(sizeof(char)*BUF_SIZE);
-    FILE *current_file= fopen(path, "r");
-
-    while(fscanf(current_file,"%49s",buff)!=EOF)
-    {
-        if(doc_verbose!=NULL){
-            printf("\n%s_DOC_%s\n",buff,doc_verbose);
-            strcat(buff, "_DOC_");
-            strcat(buff, doc_verbose);
-            hashtable->hash_items[create_hash(buff)]->counter/=counter;
+    if(doc_verbose!=NULL){
+        if (hashtable == NULL) {
+            fprintf(stderr, "Can`t access hashtable");
+        } else {
+            for (int i = 0; i < DEFAULT_TABLE_SIZE; i++) {
+            if (hashtable->hash_items[i] != NULL) {
+                hashtable->hash_items[i]->counter/=counter;
+            }
+            }
         }
     }
-    fclose(current_file);
-    return 0;
+    return 1;
 }
 
 size_t tf_idf_metrics_from_file(const char* path,hashtable_t* hashtable,char* doc_verbose,size_t doc_amount){
@@ -83,46 +86,46 @@ size_t tf_idf_metrics_from_file(const char* path,hashtable_t* hashtable,char* do
     char *buff = malloc(sizeof(char)*BUF_SIZE);
     float idf_val=0;
 
-    FILE *current_file= fopen(path, "r");
-    while(fscanf(current_file,"%49s",buff)!=EOF)
-    {
-        if(doc_verbose!=NULL){
-            idf_val=count_idf(hashtable,buff,doc_amount);
-            strcat(buff, "_DOC_");
-            strcat(buff, doc_verbose);
-            hashtable->hash_items[create_hash(buff)]->counter*=idf_val;
+    
+    if(doc_verbose!=NULL){
+        if (hashtable == NULL) {
+            fprintf(stderr, "Can`t access hashtable");
+        } else {
+            for (int i = 0; i < DEFAULT_TABLE_SIZE; i++) {
+            if (hashtable->hash_items[i] != NULL) {
+                idf_val=count_idf(hashtable,hashtable->hash_items[i]->key,doc_amount,doc_verbose);
+                hashtable->hash_items[i]->counter*=idf_val;
+            }
+            }
         }
     }
-    fclose(current_file);
 
     return 0;
 }
 
 
-float count_idf(hashtable_t* hashtable, const char* word,size_t dir_size){
+float count_idf(hashtable_t* hashtable, const char* word,size_t dir_size,char* doc_verbose){
     char *buff = malloc(sizeof(char)*BUF_SIZE);
-    strcpy(buff,word);
-    strcat(buff, "_DOC_1.txt");
+    char *wordCopy = malloc(sizeof(char)*BUF_SIZE);
+    strcpy(wordCopy,word);
+    int len = strlen(word);
+    wordCopy[len-10] = '\0';
     float idf_val=0;
-    unsigned int hash = create_hash(buff);
-    hash_item_t *item = hashtable->hash_items[hash];
-    if(item==NULL){
-        printf("There is no %s in a given hashtable!\n",word);
-    }
-    else{
-        for(int i=1;i<=dir_size;++i){
-            snprintf(buff, BUF_SIZE*sizeof(char),"%s_DOC_%i.txt",word,i);
-            hash=create_hash(buff);
-            item = hashtable->hash_items[hash];
-            if(item==NULL){
-                // printf("There is no %s in a given hashtable!\n",word);
-            }
-            else{
-                idf_val+=1.0;
-            }
+    unsigned int hash = create_hash(wordCopy);
+    hash_item_t *item;
+    for(int i=1;i<=dir_size;++i){
+        snprintf(buff, BUF_SIZE*sizeof(char),"%s_DOC_%i.txt",wordCopy,i);
+        printf("CHECKING %s\n\n", buff);
+        hash=create_hash(buff);
+        item = hashtable->hash_items[hash];
+        if(item==NULL){
+             // printf("There is no %s in a given hashtable!\n",buff);
+        }
+        else{
+            idf_val+=1.0;
         }
     }
-    return idf_val;
+    return (dir_size/idf_val);
 }
 
 size_t fill_hashtable_from_dir(const char* path, hashtable_t* hashtable_t){
@@ -163,11 +166,12 @@ size_t fill_hashtable_from_dir(const char* path, hashtable_t* hashtable_t){
         char doc_name[3];
         for(int i=0;i<files_amount;++i){
             sprintf(doc_name, "%i.txt", i+1);
+            printf("%s\n", doc_name);
             fill_hashtable_from_file(queries[i],hashtable_t, doc_name);
         }
         for(int i=0;i<files_amount;++i){
             sprintf(doc_name, "%i.txt", i+1);
-            tf_idf_metrics_from_file(queries[i],hashtable_t,doc_name,files_amount+1);
+            tf_idf_metrics_from_file(queries[i],hashtable_t,doc_name,files_amount);
         }
 
     }

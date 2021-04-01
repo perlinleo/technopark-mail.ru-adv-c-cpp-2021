@@ -3,14 +3,7 @@
 
 #include <hashtable.h>
 
-#define DEFAULT_TABLE_SIZE 150000000
-                           
-// размер файла-> 1мб -> 1млн символов , при средней длинне слова в 4.5 буквы
-// максимальное количество разных слов в одном файле=222222 222222
 
-#define RAND_VALUE 40
-
-#define MAX_WORD_LENGTH 50
 /*
 typedef struct word{
 

@@ -19,7 +19,7 @@
 #define MAX_FILENAME 100
 
 
-float count_idf(hashtable_t* hashtable, const char* word,size_t dir_size);
+float count_idf(hashtable_t* hashtable, const char* word,size_t dir_size,char* doc_verbose);
 
 size_t fill_hashtable_from_file(const char* path,hashtable_t* hashtable, char* doc_verbose);
 
