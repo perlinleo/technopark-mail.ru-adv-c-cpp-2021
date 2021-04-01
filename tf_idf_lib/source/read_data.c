@@ -74,24 +74,24 @@ size_t get_tf_idf_from_dir(const char* path, hashtable_t* hashtable_t) {
   return files_amount;
 }
 
-size_t get_top_5_for_doc(hashtable_t* hashtable, const char* doc_verbose){
+size_t get_top_5_for_doc(hashtable_t* hashtable, const char* doc_verbose) {
   char doc[MAX_FILENAME];
-  string_val** strings_from_doc = malloc(sizeof(string_val*)*MAX_WORD_COUNT);
-  int counter=0;
+  string_val** strings_from_doc = malloc(sizeof(string_val*) * MAX_WORD_COUNT);
+  int counter = 0;
 
-  snprintf(doc,MAX_FILENAME,"%s.txt",doc_verbose);
+  snprintf(doc, MAX_FILENAME, "%s.txt", doc_verbose);
   for (int i = 0; i < DEFAULT_TABLE_SIZE; i++) {
-        if (hashtable->hash_items[i] != NULL) {
-          if(strstr(hashtable->hash_items[i]->key, doc)){
-            strings_from_doc[counter]=malloc(sizeof(string_val));
-            strings_from_doc[counter]->key=malloc(sizeof(char)*MAX_WORD_LENGTH);
-            snprintf(strings_from_doc[counter]->key,MAX_WORD_LENGTH,"%s",
-                              hashtable->hash_items[i]->key);
-            strings_from_doc[counter]->val=hashtable->hash_items[i]->counter;
-            counter++;
-          }
-        }
+    if (hashtable->hash_items[i] != NULL) {
+      if (strstr(hashtable->hash_items[i]->key, doc)) {
+        strings_from_doc[counter] = malloc(sizeof(string_val));
+        strings_from_doc[counter]->key = malloc(sizeof(char) * MAX_WORD_LENGTH);
+        snprintf(strings_from_doc[counter]->key, MAX_WORD_LENGTH, "%s",
+                 hashtable->hash_items[i]->key);
+        strings_from_doc[counter]->val = hashtable->hash_items[i]->counter;
+        counter++;
       }
-  sort_string_val_array(strings_from_doc,counter);
+    }
+  }
+  sort_string_val_array(strings_from_doc, counter);
   print_top_5(strings_from_doc);
 }

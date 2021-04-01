@@ -22,7 +22,7 @@ size_t count_words(const char* path, hashtable_t* hashtable,
       strcat(buff, doc_verbose);
       add_value(hashtable, buff);
     }
-    
+
     ++counter;
   }
   fclose(current_file);

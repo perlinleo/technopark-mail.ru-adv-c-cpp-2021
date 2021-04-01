@@ -14,14 +14,14 @@ unsigned int create_hash(const char *str) {
   int c;
 
   while (c = *str++) {
-    hash = ((hash << 5) + hash) + c; 
+    hash = ((hash << 5) + hash) + c;
   }
-  if(hash<0){
-    hash*=-1;
+  if (hash < 0) {
+    hash *= -1;
   }
-  hash = hash% DEFAULT_TABLE_SIZE;
+  hash = hash % DEFAULT_TABLE_SIZE;
   // printf("%i %i\n", hash, DEFAULT_TABLE_SIZE);
-  return (hash );
+  return (hash);
 }
 
 hash_item_t *new_hash_item(const char *key) {
@@ -45,14 +45,15 @@ hash_item_t *new_hash_item(const char *key) {
 
 hashtable_t *create_hash_table() {
   system("pwd");
-  hashtable_t *new_hashtable = (hashtable_t*)malloc(sizeof(hashtable_t));
+  hashtable_t *new_hashtable = (hashtable_t *)malloc(sizeof(hashtable_t));
   system("pwd");
   if (new_hashtable == NULL) {
     fprintf(stderr, "hashtable allocation error!\n");
     return;
   }
   system("pwd");
-  new_hashtable->hash_items = (hash_item_t**)calloc(sizeof(hash_item_t *), DEFAULT_TABLE_SIZE);
+  new_hashtable->hash_items =
+      (hash_item_t **)calloc(sizeof(hash_item_t *), DEFAULT_TABLE_SIZE);
   if (new_hashtable->hash_items == NULL) {
     fprintf(stderr, "hashtable->hast_items allocation error!\n");
     free(new_hashtable);
@@ -85,8 +86,9 @@ void print_hash_table(hashtable_t *hashtable) {
   } else {
     for (int i = 0; i < DEFAULT_TABLE_SIZE; i++) {
       if (hashtable->hash_items[i] != NULL) {
-        printf("%s has value of %f (hash: 0x%x )\n", hashtable->hash_items[i]->key,
-               hashtable->hash_items[i]->counter, i);
+        printf("%s has value of %f (hash: 0x%x )\n",
+               hashtable->hash_items[i]->key, hashtable->hash_items[i]->counter,
+               i);
       }
     }
   }
