@@ -4,6 +4,7 @@
 #ifndef INCLUDE_DATA_HASHTABLE_H_
 #define INCLUDE_DATA_HASHTABLE_H_
 
+#include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

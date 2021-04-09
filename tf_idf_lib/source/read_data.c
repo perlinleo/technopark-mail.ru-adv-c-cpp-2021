@@ -24,15 +24,13 @@ size_t fill_hashtable_from_file(const char* path, hashtable_t* hashtable,
 }
 
 size_t get_tf_idf_from_dir(const char* path, hashtable_t* hashtable_t) {
-  clock_t begin = clock();
-
   DIR* directory;
   size_t files_amount = 0;
   directory = opendir(path);
   char** queries = malloc(sizeof(char*) * MAX_FILES_AMOUNT);
   if (queries == NULL) {
     printf("Can`t alloc space for files array\n");
-    }
+  }
 
   // получаю пути к файлам
 
@@ -62,9 +60,7 @@ size_t get_tf_idf_from_dir(const char* path, hashtable_t* hashtable_t) {
       free(queries[i]);
     }
   }
-  clock_t end = clock();
-  double ts = (double)(end - begin) / CLOCKS_PER_SEC;
-  printf("\nTIME SPENT: %lf\n", ts);
+
   free(queries);
   return files_amount;
 }
@@ -88,5 +84,5 @@ size_t get_top_5_for_doc(hashtable_t* hashtable, const char* doc_verbose) {
     }
   }
   sort_string_val_array(strings_from_doc, counter);
-  print_top_5(strings_from_doc);
+  print_top_5(strings_from_doc, counter);
 }

@@ -19,6 +19,7 @@ add_subdirectory(${CMAKE_BINARY_DIR}/googletest-src
 
 enable_testing()
 add_subdirectory(test)
+
 # </Test>
 
 # <Source>
@@ -27,7 +28,7 @@ include_directories("${PROJECT_SOURCE_DIR}/tf_idf_lib/include")
 
 file(GLOB sources
         "${PROJECT_SOURCE_DIR}/tf_idf_lib/include/*.h"
-        "${PROJECT_SOURCE_DIR}/tf_idf_lib/source/*.c")
+        "${PROJECT_SOURCE_DIR}/tf_idf_lib/source_threads/*.c")
 # </Source>
 
 # <SOURCE_DIR>
@@ -37,3 +38,7 @@ add_definitions(-DSOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
 add_executable(homework2 ${sources})
 
 set_target_properties(homework2 PROPERTIES LINKER_LANGUAGE C)
+
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
+target_link_libraries(homework2 PRIVATE Threads::Threads)

@@ -5,13 +5,13 @@
 #define INCLUDE_DATA_READ_DATA_H_
 
 #include <dirent.h>
+#include <dlfcn.h>
 #include <hashtable.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <string_val.h>
 #include <term_freq.h>
-#include <dlfcn.h>
 #include <time.h>
 
 #define BUF_SIZE_PATH 255

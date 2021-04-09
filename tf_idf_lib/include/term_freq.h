@@ -17,8 +17,15 @@ float count_idf(hashtable_t* hashtable, const char* word, size_t dir_size,
 size_t tf_metrics(const char* path, hashtable_t* hashtable, char* doc_verbose,
                   float counter);
 
+size_t tf_metrics_multythread(const char* path, hashtable_t* hashtable,
+                              char* doc_verbose, float counter,
+                              pthread_mutex_t* mutex_lock);
+
 size_t tf_idf_metrics(const char* path, hashtable_t* hashtable,
                       char* doc_verbose, size_t doc_amount);
+
+size_t count_words_multythread(const char* path, hashtable_t* hashtable,
+                               char* doc_verbose, pthread_mutex_t* mutex_lock);
 
 size_t count_words(const char* path, hashtable_t* hashtable, char* doc_verbose);
 
