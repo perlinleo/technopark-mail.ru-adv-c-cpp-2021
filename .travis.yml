@@ -14,8 +14,8 @@ install:
   - sudo pip install cpplint
 
 script:
-  - cppcheck --enable=all --language=c tf_idf_lib/include/*.h tf_idf_lib/source/*.c --suppress=missingInclude
-  - cpplint --extensions=c tf_idf_lib/include/* tf_idf_lib/source/*
+  - cppcheck --enable=all --language=c tf_idf_lib/include/*.h tf_idf_lib/source/*.c tf_idf_lib/source_threads/*.c --suppress=missingInclude --suppress=unusedFunction
+  - cpplint --extensions=c tf_idf_lib/source/* tf_idf_lib/source_threads/*.c
   - mkdir build && cd build
   - cmake ..  
   - make clean && make
