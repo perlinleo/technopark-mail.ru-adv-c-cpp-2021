@@ -85,11 +85,11 @@ size_t tf_idf_metrics(const char* path, hashtable_t* hashtable,
 float count_idf(hashtable_t* hashtable, const char* word, size_t dir_size,
                 char* doc_verbose) {
   char* buff = malloc(sizeof(char) * BUF_SIZE);
-  if(buff==NULL){
+  if (buff == NULL) {
     return ERROR;
   }
   char* wordCopy = malloc(sizeof(char) * BUF_SIZE);
-  if(wordCopy==NULL){
+  if (wordCopy == NULL) {
     return ERROR;
   }
   snprintf(wordCopy, MAX_WORD_LENGTH, "%s", word);

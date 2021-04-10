@@ -45,8 +45,7 @@ int main(int argc, char **argv) {
   }
 
   printf("\t Time spent parralel: %li \n", test("../data/", tf_idf));
-  printf("\t Time spent cons: %li \n",
-         test("../data/", get_tf_idf_from_dir));
+  printf("\t Time spent cons: %li \n", test("../data/", get_tf_idf_from_dir));
 
   dlclose(libhandle);
   return 0;

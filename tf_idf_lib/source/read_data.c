@@ -17,7 +17,6 @@ size_t fill_hashtable_from_file(const char* path, hashtable_t* hashtable,
       // printf("Succesefully calculated TF metrics\n");
     }
   } else {
-
     return -1;
   }
 
