@@ -19,10 +19,7 @@ script:
   - mkdir build && cd build
   - cmake ..  
   - make clean && make
-  - pwd
   - valgrind --tool=memcheck --leak-check=full ctest
-  - cd ../data/test-1
-  - ls
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
