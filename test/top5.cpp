@@ -10,7 +10,7 @@ extern "C"{
 
 TEST(top5, correctdata1){
   hashtable_t *TF_ALL_DOCS = create_hash_table();
-  int a = get_tf_idf_from_dir("../../data/test-1/",TF_ALL_DOCS);
+  int a = get_tf_idf_from_dir("../../data/",TF_ALL_DOCS);
    ASSERT_EQ(a,5);
    int b = get_top_5_for_doc(TF_ALL_DOCS,"1");
    ASSERT_EQ(b,6);

@@ -9,6 +9,6 @@ extern "C"{
 
 TEST(getdocs, correct){
     hashtable_t *TF_ALL_DOCS = create_hash_table();
-    int a = get_tf_idf_from_dir("../../data/test-1/",TF_ALL_DOCS);
+    int a = get_tf_idf_from_dir("../../data/",TF_ALL_DOCS);
     ASSERT_EQ(a,5);
 }
