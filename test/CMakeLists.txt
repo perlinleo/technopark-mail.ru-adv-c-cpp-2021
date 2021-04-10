@@ -6,6 +6,8 @@ include_directories("${PROJECT_SOURCE_DIR}/tf_idf_lib/include")
 file(GLOB sources "${PROJECT_SOURCE_DIR}/tf_idf_lib/source/*.c")
 list(REMOVE_ITEM sources "${PROJECT_SOURCE_DIR}/tf_idf_lib/source/main.c")
 
+
+
 file(GLOB tests "${PROJECT_SOURCE_DIR}/test/*.cpp")
 list(REMOVE_ITEM tests "${PROJECT_SOURCE_DIR}/test/main.cpp")
 

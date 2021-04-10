@@ -17,7 +17,7 @@ size_t fill_hashtable_from_file(const char* path, hashtable_t* hashtable,
       // printf("Succesefully calculated TF metrics\n");
     }
   } else {
-    // printf("No words found!\n");
+
     return -1;
   }
 
@@ -44,7 +44,7 @@ size_t get_tf_idf_from_dir(const char* path, hashtable_t* hashtable_t) {
                  dir->d_name);
         files_amount++;
       } else {
-        // printf("\n%s isn`t .txt\n", dir->d_name);
+        // ___
       }
     }
     char doc_name[MAX_FILENAME];

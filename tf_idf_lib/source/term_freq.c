@@ -4,6 +4,7 @@
 #include <term_freq.h>
 
 #define ERROR -1
+#define DEFAULT_OFFSET 10
 
 size_t count_words(const char* path, hashtable_t* hashtable,
                    char* doc_verbose) {
@@ -84,11 +85,16 @@ size_t tf_idf_metrics(const char* path, hashtable_t* hashtable,
 float count_idf(hashtable_t* hashtable, const char* word, size_t dir_size,
                 char* doc_verbose) {
   char* buff = malloc(sizeof(char) * BUF_SIZE);
+  if(buff==NULL){
+    return ERROR;
+  }
   char* wordCopy = malloc(sizeof(char) * BUF_SIZE);
-
+  if(wordCopy==NULL){
+    return ERROR;
+  }
   snprintf(wordCopy, MAX_WORD_LENGTH, "%s", word);
   int len = strlen(word);
-  wordCopy[len - 10] = '\0';
+  wordCopy[len - DEFAULT_OFFSET] = '\0';
   float idf_val = 0;
 
   for (int i = 1; i <= dir_size; ++i) {
