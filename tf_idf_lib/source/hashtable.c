@@ -41,7 +41,7 @@ hashtable_t *create_hash_table() {
   system("pwd");
   if (new_hashtable == NULL) {
     fprintf(stderr, "hashtable allocation error!\n");
-    return;
+    return NULL;
   }
   system("pwd");
   new_hashtable->hash_items =
@@ -49,7 +49,7 @@ hashtable_t *create_hash_table() {
   if (new_hashtable->hash_items == NULL) {
     fprintf(stderr, "hashtable->hast_items allocation error!\n");
     free(new_hashtable);
-    return;
+    return NULL;
   }
   system("pwd");
 

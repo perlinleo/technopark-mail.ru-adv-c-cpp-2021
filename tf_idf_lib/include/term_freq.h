@@ -10,6 +10,8 @@
 #include <string.h>
 
 #define BUF_SIZE 50
+#define NULL_HASHTABLE 13
+#define NULL_DOC_VERB 14
 
 float count_idf(hashtable_t* hashtable, const char* word, size_t dir_size,
                 char* doc_verbose);

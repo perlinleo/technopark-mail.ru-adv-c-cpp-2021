@@ -3,6 +3,8 @@
 
 #include <hashtable.h>
 
+#define ALLOC_ERROR NULL
+
 unsigned int create_hash(const char *str) {
   __int64_t hash = RAND_VALUE;
   int c;
@@ -20,14 +22,14 @@ unsigned int create_hash(const char *str) {
 hash_item_t *new_hash_item(const char *key) {
   hash_item_t *item = malloc(sizeof(hash_item_t));
   if (item == NULL) {
-    printf("insufficient memory available/new_hash_item");
-    return NULL;
+    fprintf(stderr, "insufficient memory available/new_hash_item");
+    return ALLOC_ERROR;
   }
   item->key = malloc(strlen(key) * sizeof(char) + 1);
   if (item->key == NULL) {
-    printf("insufficient memory available/new_hash_item");
+    fprintf(stderr, "insufficient memory available/new_hash_item");
     free(item);
-    return NULL;
+    return ALLOC_ERROR;
   }
   item->counter = 1.0;
   snprintf(item->key, strlen(key) * sizeof(char) + 1, "%s", key);
@@ -41,7 +43,7 @@ hashtable_t *create_hash_table() {
   system("pwd");
   if (new_hashtable == NULL) {
     fprintf(stderr, "hashtable allocation error!\n");
-    return;
+    return ALLOC_ERROR;
   }
   system("pwd");
   new_hashtable->hash_items =
@@ -49,7 +51,7 @@ hashtable_t *create_hash_table() {
   if (new_hashtable->hash_items == NULL) {
     fprintf(stderr, "hashtable->hast_items allocation error!\n");
     free(new_hashtable);
-    return;
+    return ALLOC_ERROR;
   }
   system("pwd");
 

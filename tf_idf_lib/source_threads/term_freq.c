@@ -11,20 +11,23 @@ size_t count_words_multythread(const char* path, hashtable_t* hashtable,
 
   if (hashtable == NULL) {
     fprintf(stderr, "can`t access given hashtable");
-    return NULL;
+    return NULL_HASHTABLE;
   }
   size_t counter = 0;
   FILE* current_file = fopen(path, "r");
 
   char* buff = malloc(sizeof(char) * BUF_SIZE);
   while (fscanf(current_file, "%49s", buff) != EOF) {
-    printf("WORKING WITH DOC %s\n", doc_verbose);
+    // printf("WORKING WITH DOC %s\n", doc_verbose);
     if (doc_verbose != NULL) {
       strcat(buff, "_DOC_");
       strcat(buff, doc_verbose);
       pthread_mutex_lock(mutex_lock);
       add_value(hashtable, buff);
       pthread_mutex_unlock(mutex_lock);
+    } else {
+      fprintf(stderr, "empty doc_verb\n");
+      return NULL_DOC_VERB;
     }
 
     ++counter;
@@ -41,7 +44,7 @@ size_t tf_metrics_multythread(const char* path, hashtable_t* hashtable,
 
   if (hashtable == NULL) {
     fprintf(stderr, "can`t access given hashtable");
-    return NULL;
+    return NULL_HASHTABLE;
   }
   if (doc_verbose != NULL) {
     if (hashtable == NULL) {
@@ -51,8 +54,6 @@ size_t tf_metrics_multythread(const char* path, hashtable_t* hashtable,
         if (hashtable->hash_items[i] != NULL) {
           if (strstr(hashtable->hash_items[i]->key, doc_verbose) != NULL) {
             pthread_mutex_lock(mutex_lock);
-            printf("i am %f counter val: %f\n",
-                   hashtable->hash_items[i]->counter, counter);
             hashtable->hash_items[i]->counter /= counter;
             pthread_mutex_unlock(mutex_lock);
           }
@@ -70,7 +71,7 @@ size_t tf_idf_metrics(const char* path, hashtable_t* hashtable,
 
   if (hashtable == NULL) {
     fprintf(stderr, "can`t access given hashtable");
-    return NULL;
+    return NULL_HASHTABLE;
   }
 
   if (doc_verbose != NULL) {

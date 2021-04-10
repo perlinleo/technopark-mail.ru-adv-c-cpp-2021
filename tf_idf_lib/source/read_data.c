@@ -6,18 +6,19 @@
 size_t fill_hashtable_from_file(const char* path, hashtable_t* hashtable,
                                 char* doc_verbose) {
   if (hashtable == NULL) {
-    printf("Can`t access given hashtable\n");
-    return NULL;
+    // printf("Can`t access given hashtable\n");
+    return NULL_HASHTABLE;
   }
   int counter = count_words(path, hashtable, doc_verbose);
-  print_hash_table(hashtable);
+  // print_hash_table(hashtable);
   if (counter > 0) {
     if (tf_metrics(path, hashtable, doc_verbose, counter) > 0) {
-      print_hash_table(hashtable);
-      printf("Succesefully calculated TF metrics\n");
+      // print_hash_table(hashtable);
+      // printf("Succesefully calculated TF metrics\n");
     }
   } else {
-    printf("No words found!\n");
+    // printf("No words found!\n");
+    return -1;
   }
 
   return counter;
@@ -43,13 +44,13 @@ size_t get_tf_idf_from_dir(const char* path, hashtable_t* hashtable_t) {
                  dir->d_name);
         files_amount++;
       } else {
-        printf("\n%s isn`t .txt\n", dir->d_name);
+        // printf("\n%s isn`t .txt\n", dir->d_name);
       }
     }
     char doc_name[MAX_FILENAME];
     for (int i = 0; i < files_amount; ++i) {
       snprintf(doc_name, MAX_FILENAME, "%i.txt", i + 1);
-      printf("%s\n", doc_name);
+      // printf("%s\n", doc_name);
       fill_hashtable_from_file(queries[i], hashtable_t, doc_name);
     }
     for (int i = 0; i < files_amount; ++i) {
@@ -85,4 +86,5 @@ size_t get_top_5_for_doc(hashtable_t* hashtable, const char* doc_verbose) {
   }
   sort_string_val_array(strings_from_doc, counter);
   print_top_5(strings_from_doc, counter);
+  return counter;
 }

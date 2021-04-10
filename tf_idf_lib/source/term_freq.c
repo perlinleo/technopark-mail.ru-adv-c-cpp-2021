@@ -3,6 +3,8 @@
 
 #include <term_freq.h>
 
+#define ERROR -1
+
 size_t count_words(const char* path, hashtable_t* hashtable,
                    char* doc_verbose) {
   // Подсчёт количества слов в файле.
@@ -10,7 +12,7 @@ size_t count_words(const char* path, hashtable_t* hashtable,
 
   if (hashtable == NULL) {
     fprintf(stderr, "can`t access given hashtable");
-    return NULL;
+    return ERROR;
   }
   size_t counter = 0;
   FILE* current_file = fopen(path, "r");
@@ -36,7 +38,7 @@ size_t tf_metrics(const char* path, hashtable_t* hashtable, char* doc_verbose,
 
   if (hashtable == NULL) {
     fprintf(stderr, "can`t access given hashtable");
-    return NULL;
+    return ERROR;
   }
   if (doc_verbose != NULL) {
     if (hashtable == NULL) {
@@ -49,7 +51,7 @@ size_t tf_metrics(const char* path, hashtable_t* hashtable, char* doc_verbose,
       }
     }
   }
-  return 1;
+  return 0;
 }
 
 size_t tf_idf_metrics(const char* path, hashtable_t* hashtable,
@@ -59,7 +61,7 @@ size_t tf_idf_metrics(const char* path, hashtable_t* hashtable,
 
   if (hashtable == NULL) {
     fprintf(stderr, "can`t access given hashtable");
-    return NULL;
+    return ERROR;
   }
 
   if (doc_verbose != NULL) {

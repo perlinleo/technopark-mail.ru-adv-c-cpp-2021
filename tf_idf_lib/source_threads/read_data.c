@@ -4,6 +4,7 @@
 #include <pthread.h>
 #include <read_data.h>
 
+#define ACCESS_ERROR
 #define STAGECOUNT 1
 #define STAGETF 2
 #define STAGETF_IDF 3
@@ -13,20 +14,22 @@ typedef struct ht_mutex_t {
   pthread_mutex_t mutex;
 } ht_mutex_t;
 
-ht_mutex_t data = {PTHREAD_MUTEX_INITIALIZER, 0};
+ht_mutex_t data = {0, 0, 0, 0, PTHREAD_MUTEX_TIMED_NP, 0, 0, 0, 0};
+// ht_mutex_t data = {PTHREAD_MUTEX_INITIALIZER, 0};
+
 int counterGlobal = 0, threadAmount = 12, threadsFinished = 0,
     files_amount_glob = 0;
 
 typedef struct fhtff {
-  char* path[MAX_FILENAME];
-  char* doc_verbose[MAXNAMLEN];
+  char path[MAX_FILENAME];
+  char doc_verbose[MAXNAMLEN];
 } fhtff;
 
 void* fill_hashtable_tf_from_file_thread(void* arg) {
   printf("started !\n");
   fhtff* fhtff_arg = (fhtff*)arg;
   const char* path = fhtff_arg->path;
-  const char* doc_verbose = fhtff_arg->doc_verbose;
+  char* doc_verbose = fhtff_arg->doc_verbose;
   pthread_mutex_t* mutex = &data.mutex;
   if (data.hashtable == NULL) {
     printf("Can`t access given hashtable\n");
@@ -34,7 +37,9 @@ void* fill_hashtable_tf_from_file_thread(void* arg) {
   }
   float counter =
       count_words_multythread(path, data.hashtable, doc_verbose, mutex);
-  printf(" %i |COUNTER VAL|", counter);
+
+  // [DELETE] printf(" %i |COUNTER VAL|", counter);
+
   counterGlobal += counter;
   if (counter > 0) {
     if (tf_metrics_multythread(path, data.hashtable, doc_verbose, counter,
@@ -54,7 +59,7 @@ void* fill_hashtable_tf_idf_from_file_thread(void* arg) {
   printf("started !\n");
   fhtff* fhtff_arg = (fhtff*)arg;
   const char* path = fhtff_arg->path;
-  const char* doc_verbose = fhtff_arg->doc_verbose;
+  char* doc_verbose = fhtff_arg->doc_verbose;
   tf_idf_metrics(path, data.hashtable, doc_verbose, files_amount_glob);
   threadsFinished++;
   printf("finished!\n");
@@ -83,22 +88,23 @@ void *fill_hashtable_tf_idf_from_file_thread(void* arg){
 
 }
 */
+
+/*
 size_t fill_hashtable_from_file(const char* path, hashtable_t* hashtable,
                                 char* doc_verbose) {
   if (hashtable == NULL) {
     printf("Can`t access given hashtable\n");
-    return NULL;
+    return NULL_HASHTABLE;
   }
   // int counter = count_words(path, hashtable, doc_verbose);
   int counter = 0;
-  /*
+
    __  _     _                                 _  __
   / / | |_  | |__    _ __    ___    __ _    __| | \ \
  | |  | __| | '_ \  | '__|  / _ \  / _` |  / _` |  | |
  | |  | |_  | | | | | |    |  __/ | (_| | | (_| |  | |
  | |   \__| |_| |_| |_|     \___|  \__,_|  \__,_|  | |
   \_\                                             /_/
-  */
   /*print_hash_table(hashtable);
   if (counter > 0) {
     if (tf_metrics(path, hashtable, doc_verbose, counter) > 0) {
@@ -108,9 +114,11 @@ size_t fill_hashtable_from_file(const char* path, hashtable_t* hashtable,
   } else {
     printf("No words found!\n");
   }
-  */
+
   return counter;
 }
+
+*/
 
 size_t get_tf_idf_from_dir(const char* path, hashtable_t* hashtable_t) {
   DIR* directory;
@@ -132,10 +140,9 @@ size_t get_tf_idf_from_dir(const char* path, hashtable_t* hashtable_t) {
                  dir->d_name);
         files_amount++;
       } else {
-        printf("\n%s isn`t .txt\n", dir->d_name);
+        // printf("\n%s isn`t .txt\n", dir->d_name);
       }
     }
-    char doc_name[MAX_FILENAME];
 
     fhtff* jobs = malloc(sizeof(fhtff) * 100);
     data.hashtable = hashtable_t;
@@ -147,7 +154,7 @@ size_t get_tf_idf_from_dir(const char* path, hashtable_t* hashtable_t) {
       // pthread_create(&threadsIds[threadCounter],NULL,fill_hashtable_tf_from_file_thread,threadInfo);
     }  // получаю threadInfo для следующих потоков.
     for (int i = 0; i < files_amount; ++i) {
-      printf("%s %s THREADINFO\n", jobs[i].doc_verbose, jobs[i].path);
+      // printf("%s %s THREADINFO\n", jobs[i].doc_verbose, jobs[i].path);
     }
 
     pthread_t threadsIds[files_amount];
@@ -155,13 +162,13 @@ size_t get_tf_idf_from_dir(const char* path, hashtable_t* hashtable_t) {
     for (int i = 0; i < files_amount; ++i) {
       if (pthread_create(&threadsIds[i], NULL,
                          fill_hashtable_tf_from_file_thread, &jobs[i]) == 0) {
-        printf("THREAD NUM #%i CREATED \n", i);
+        // printf("THREAD NUM #%i CREATED \n", i);
       }
     }
     while (threadsFinished < files_amount) {
       // printf("FINISHED %i FILES AMOUNT %i \n",threadsFinished,files_amount);
     }
-    print_hash_table(data.hashtable);
+    // print_hash_table(data.hashtable);
     files_amount_glob = files_amount;
     threadsFinished = 0;
     for (int i = 0; i < files_amount; ++i) {
@@ -171,14 +178,14 @@ size_t get_tf_idf_from_dir(const char* path, hashtable_t* hashtable_t) {
       */
       if (pthread_create(&threadsIds[i], NULL,
                          fill_hashtable_tf_idf_from_file_thread,
-                         &jobs[i]) == 0) {
-        printf("THREAD NUM #%i CREATED \n", i);
+                         &jobs[i]) != 0) {
+        // printf("THREAD NUM #%i CREATED \n", i);
       }
     }
     while (threadsFinished < files_amount) {
       // printf("FINISHED %i FILES AMOUNT %i \n",threadsFinished,files_amount);
     }
-    printf("done!\n");
+    // printf("done!\n");
     for (int i = 0; i < files_amount; ++i) {
       free(queries[i]);
     }

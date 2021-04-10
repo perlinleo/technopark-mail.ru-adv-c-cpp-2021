@@ -17,7 +17,7 @@
 #define BUF_SIZE_PATH 255
 #define MAX_WORD_LENGTH 50
 #define MAX_FILES_AMOUNT 500
-#define MAX_FILENAME 100
+#define MAX_FILENAME 255
 #define MAX_WORD_COUNT 100000
 
 size_t fill_hashtable_from_file(const char* path, hashtable_t* hashtable,
