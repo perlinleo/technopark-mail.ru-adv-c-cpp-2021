@@ -1,0 +1,4 @@
+ignore:
+  - "tf_idf_lib/source/main.c"
+  - "test"
+  - "tf_idf_lib/source_threads/"
